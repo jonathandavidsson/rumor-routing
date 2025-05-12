@@ -1,7 +1,9 @@
 public class Agent {
-    private Node currentNode;
-    private
-    public Agent(){
+    public Agent() {
+
+    }
+
+    public Position getPosition() {
 
     }
 }
