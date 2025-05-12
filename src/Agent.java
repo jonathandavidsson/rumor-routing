@@ -6,4 +6,8 @@ public class Agent {
     public Position getPosition() {
 
     }
+
+    public getVisitedNodes() {
+
+    }
 }
