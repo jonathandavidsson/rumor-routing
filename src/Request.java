@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 
-public class Request {
+public class Request implements Messenger{
 
     private Node originNode;
     private Event event;
     private int lifeTime;
     private ArrayList<Node> path;
 
-    public Request implements Messenger(){
+    public Request (){
 
     }
 
@@ -16,6 +16,9 @@ public class Request {
     }
 
     public Event getEvent(){
+
+    }
+    public Node getNode(){
 
     }
 
