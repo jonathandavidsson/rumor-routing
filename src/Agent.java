@@ -7,7 +7,7 @@ public class Agent {
 
     }
 
-    public getVisitedNodes() {
+    public Event getEvents(){
 
     }
 }
