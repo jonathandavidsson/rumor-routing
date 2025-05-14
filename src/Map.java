@@ -70,6 +70,10 @@ public class Map {
         }
     }
 
+    public Node getRandomNode() {
+        return theInfo.get((int) (Math.random() * theInfo.size()));
+    }
+
     public ArrayList<Node> getNodes() {
         return theInfo;
     }
