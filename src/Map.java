@@ -4,7 +4,7 @@ public class Map {
     private ArrayList<Node> theInfo;
     private ArrayList<Event> Events;
     private ArrayList<Node> requestNodes;
-    private int nodeReach = 15;
+    private int nodeReach = 2;
 
     public Map(Scanner s) {
         ArrayList<Position> positions = readMazeDataToPositions(s);
