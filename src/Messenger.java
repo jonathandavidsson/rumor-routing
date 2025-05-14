@@ -6,18 +6,18 @@ public interface Messenger {
     /**
      * traverses in the map
      */
-    public  void traverse();
+    void traverse();
 
 
     /**
      * Gets the messengers Event
      * @return Event
      */
-    public Event getEvent();
+    Event getEvent();
 
     /**
      * Gets the messengers Node
      * @return Node
      */
-    public Node getNode();
+    Node getNode();
 }

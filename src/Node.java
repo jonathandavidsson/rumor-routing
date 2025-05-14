@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class Node {
 
@@ -11,11 +12,10 @@ public class Node {
     }
 
     public Position getPosition(){
-
+        return pos;
     }
 
     public Event getEvent(){
-
     }
 
     public void setNearestEventDirection(Event event, Position pos){
