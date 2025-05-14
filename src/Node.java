@@ -35,6 +35,7 @@ public class Node {
         ArrayList<Object> info = new ArrayList<>();
         info.add(node);
         info.add(distance);
+        this.event = event;
 
         eventInfo.put(event, info);
     }

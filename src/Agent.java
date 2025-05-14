@@ -8,7 +8,7 @@ public class Agent {
 
     Node currentNode;
     Node prevNode;
-    ArrayList<Event> events;
+    Hashtable<Event, ArrayList<Object> events;
     Set<Node> visitedNodes;
     int lifetime;
     ArrayList<Node> neighbours;
@@ -16,8 +16,11 @@ public class Agent {
 
     public Agent(Node currentNode, Event event){
         this.currentNode = currentNode;
-        events = new ArrayList<>();
-        events.add(event);
+        events = new Hashtable<>();
+        ArrayList<Object> theInfo = new ArrayList<>();
+        theInfo.add(currentNode);
+        theInfo.add(0);
+        events.put(event, theInfo);
     }
 
     public void traverse(){
@@ -25,6 +28,12 @@ public class Agent {
             return;
         }
         deliverInformationToNode();
+        if(currentNode.getEvent() != null && events.containsKey(currentNode.getEvent())){
+            ArrayList<Object> info = new ArrayList<>();
+            info.add(currentNode);
+            info.add(0);
+            events.put(currentNode.getEvent(),info);
+        }
         neighbours = new ArrayList<>();
         movable = new ArrayList<>();
         neighbours = currentNode.getNeighbours();
@@ -37,6 +46,13 @@ public class Agent {
             lifetime = lifetime - 1;
         }else{
             lifetime = 0;
+        }
+        ArrayList<Event> keys = new ArrayList<>(events.keySet());
+        for(int i = 0; i < keys.size(); i++){
+            Event e = keys.get(i);
+            ArrayList<Object> eventInfo = events.get(e);
+            eventInfo.set(0, prevNode);
+            eventInfo.set(1, (int) eventInfo.get(1) + 1);
         }
 
     }
