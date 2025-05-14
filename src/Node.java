@@ -4,17 +4,16 @@ import java.util.Set;
 
 public class Node {
 
-    private ArrayList<Position> neighbours;
+    private ArrayList<Node> neighbours;
     private Position pos;
     private Event event;
     //Hashtable<Event, ArrayList<Object>> eventInfo;
     /*- events: Table<event: Event, direction: Position, shortest way: int*/
 
 
-    public Node(Position pos, ArrayList<Position> neighbours){
-        this.neighbours = neighbours;
+    public Node(Position pos){
         this.pos = pos;
-
+        neighbours = new ArrayList<>();
     }
 
     public Position getPosition(){
@@ -31,5 +30,8 @@ public class Node {
 
     public void takeRequest(Request req){
 
+    }
+    public void addNeighbour(Node node){
+        neighbours.add(node);
     }
 }
