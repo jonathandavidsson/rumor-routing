@@ -1,3 +1,5 @@
+import java.awt.geom.Point2D;
+
 /**
  * A class representing a position in a 2D grid
  * @author johane
@@ -77,6 +79,17 @@ public class Position {
      */
     public Position getPosToEast(){
         return new Position(x+1,y);
+    }
+
+    /**
+     * calulates the distance between two positions
+     * @param pos a Position.
+     * @return the distance.
+     */
+    public double distance(Position pos) {
+        double xd = this.x - pos.x;
+        double yd = this.y - pos.y;
+        return Math.sqrt(xd * xd + yd + yd);
     }
 
     /**

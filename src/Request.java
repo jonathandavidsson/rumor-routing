@@ -16,13 +16,13 @@ public class Request implements Messenger{
     }
 
     public Event getEvent(){
-
+        return event;
     }
     public Node getNode(){
-
+        return originNode;
     }
 
     private boolean hasReachedEvent(){
-
+        return true;
     }
 }
