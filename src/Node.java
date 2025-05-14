@@ -12,7 +12,8 @@ public class Node {
 
 
     public Node(Position pos, ArrayList<Position> neighbours){
-
+        this.neighbours = neighbours;
+        this.pos = pos;
 
     }
 
@@ -21,6 +22,7 @@ public class Node {
     }
 
     public Event getEvent(){
+        return event;
     }
 
     public void setNearestEventDirection(Event event, Position pos){

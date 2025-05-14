@@ -8,8 +8,10 @@ public class Agent {
     Set<Node> visitedNodes;
     int lifetime;
 
-    public Agent(){
-
+    public Agent(Node currentNode, Event event){
+        this.currentNode = currentNode;
+        events = new ArrayList<>();
+        events.add(event);
     }
 
     public void traverse(){

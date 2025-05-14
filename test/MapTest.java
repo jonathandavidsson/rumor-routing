@@ -2,15 +2,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class MapTest {
 
     @org.junit.jupiter.api.Test
     void getMap() throws FileNotFoundException {
         Scanner s = new Scanner(new File("layout.txt"));
         Map map = new Map(s);
-        System.out.println(map.getMap().toString());
+        System.out.println(map.getNodes().toString());
 
     }
 

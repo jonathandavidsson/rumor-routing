@@ -3,8 +3,11 @@ public class Event {
     int timeStep;
     int shortestWayToEvent;
     Position eventPosition;
-    public Event() {
-
+    public Event(int eventId, int timeStep, Position eventPosition) {
+        this.eventId = eventId;
+        this.timeStep = timeStep;
+        this.eventPosition = eventPosition;
+        shortestWayToEvent = 0;
     }
 
     public int getShortestWayToEvent() {
