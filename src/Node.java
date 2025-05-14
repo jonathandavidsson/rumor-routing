@@ -31,13 +31,13 @@ public class Node {
     public void takeRequest(Request req){
 
     }
-    public void takeAgentInfo(ArrayList<Event> event, Node node, int distance){
-        ArrayList<Object> info = new ArrayList<>();
-        info.add(node);
-        info.add(distance);
-        this.event = event;
-
-        eventInfo.put(event, info);
+    public void takeAgentInfo(Hashtable<Event, ArrayList<Object> info){
+        ArrayList<Event> keys = new ArrayList<>(info.keySet());
+        for(int i = 0; i < info.size(); i++){
+            Event e = keys.get(i);
+            ArrayList<Object> agentInfo = info.get(e);
+            eventInfo.put(e, agentInfo);
+        }
     }
     public void addNeighbour(Node node){
         neighbours.add(node);

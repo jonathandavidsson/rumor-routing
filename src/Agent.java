@@ -81,8 +81,7 @@ public class Agent {
 
     private void deliverInformationToNode(){
         /*Lämnar över information om event och vars agenten kom ifrån till nod.*/
-        int distance = visitedNodes.size();
-        currentNode.takeAgentInfo(events, prevNode, distance);
+        currentNode.takeAgentInfo(events);
     }
 
 }
