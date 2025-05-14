@@ -1,14 +1,30 @@
+import java.util.ArrayList;
+import java.util.Set;
+
 public class Agent {
 
-    public Agent() {
+    Node currentNode;
+    ArrayList<Event> events;
+    Set<Node> visitedNodes;
+    int lifetime;
+
+    public Agent(){
 
     }
 
-    public Position getPosition() {
+    public void traverse(){
 
     }
 
-    public Event getEvents(){
+    public Node getNode(){
+        return null;
+    }
 
+    public Set<Node> getVisitedNodes(){
+        return visitedNodes;
+    }
+
+    public ArrayList<Event> getEvent(){
+        return events;
     }
 }
