@@ -9,11 +9,17 @@ public class Map {
     public Map(Scanner s) {
         ArrayList<Position> positions = readMazeDataToPositions(s);
         addNeighbours(positions);
+        addRequestNodes();
     }
 
+    /*
+     * reads the scanner and converts the file to positions
+     * throws a RuntimeException
+     * @param s A scanner
+     * @return An ArrayList with the positions of the file
+     */
     private ArrayList<Position> readMazeDataToPositions(Scanner s){
         String str;
-        theInfo=new ArrayList<>();
         ArrayList<Position> positions = new ArrayList<>();
 
         try {
@@ -31,17 +37,36 @@ public class Map {
         }
         return positions;
     }
+
+    /*
+     * Calculates which positions are in range for a node
+     * and creates nodes in all positions.
+     * @param positions A list with every position.
+     */
     private void addNeighbours(ArrayList<Position> positions) {
+        theInfo=new ArrayList<>();
+
         for (Position pos1: positions) {
-            ArrayList<Position> pos1Neigbours = new ArrayList<>();
+            ArrayList<Position> pos1Neighbours = new ArrayList<>();
+
             for (Position pos2: positions) {
-                
+
                 if (!pos1.equals(pos2) && pos1.distance(pos2) <= nodeReach) {
-                    pos1Neigbours.add(pos2);
+                    pos1Neighbours.add(pos2);
                 }
-                theInfo.add(new Node(pos1, pos1Neigbours));
+                theInfo.add(new Node(pos1, pos1Neighbours));
             }
             
+        }
+    }
+
+    /*
+     *chooses random nodes that will send out a request.
+     */
+    private void addRequestNodes(){
+        requestNodes = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            requestNodes.add(theInfo.get( (int) (Math.random() * theInfo.size())));
         }
     }
 
