@@ -31,10 +31,11 @@ public class Node {
     public void takeRequest(Request req){
 
     }
-    public void takeAgentInfo(Event event, Node node, int distance){
+    public void takeAgentInfo(ArrayList<Event> event, Node node, int distance){
         ArrayList<Object> info = new ArrayList<>();
         info.add(node);
         info.add(distance);
+
         eventInfo.put(event, info);
     }
     public void addNeighbour(Node node){

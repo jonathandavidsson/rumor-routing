@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Set;
 
 import static java.lang.Math.random;
@@ -6,6 +7,7 @@ import static java.lang.Math.random;
 public class Agent {
 
     Node currentNode;
+    Node prevNode;
     ArrayList<Event> events;
     Set<Node> visitedNodes;
     int lifetime;
@@ -20,8 +22,9 @@ public class Agent {
 
     public void traverse(){
         if(lifetime == 0){
-            /* Avsluta robot. */
+            return;
         }
+        deliverInformationToNode();
         neighbours = new ArrayList<>();
         movable = new ArrayList<>();
         neighbours = currentNode.getNeighbours();
@@ -29,7 +32,9 @@ public class Agent {
         visitedNodes.add(currentNode);
 
         if(!movable.isEmpty()){
+            prevNode = currentNode;
             currentNode = movable.get((int) (random() * movable.size()));
+            lifetime = lifetime - 1;
         }else{
             lifetime = 0;
         }
@@ -57,4 +62,11 @@ public class Agent {
         }
         return movableNodes;
     }
+
+    private void deliverInformationToNode(){
+        /*Lämnar över information om event och vars agenten kom ifrån till nod.*/
+        int distance = visitedNodes.size();
+        currentNode.takeAgentInfo(events, prevNode, distance);
+    }
+
 }
