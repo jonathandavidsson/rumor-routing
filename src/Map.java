@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Map {
     private ArrayList<Node> theInfo;
-    private ArrayList<Event> Events;
+    private ArrayList<Event> events;
     private ArrayList<Node> requestNodes;
     private int nodeReach = 2;
 
@@ -10,6 +10,7 @@ public class Map {
         ArrayList<Position> positions = readMazeDataToPositions(s);
         addNeighbours(positions);
         addRequestNodes();
+        events = new ArrayList<>();
     }
 
     /*
@@ -78,8 +79,8 @@ public class Map {
         return theInfo;
     }
 
-    public void updateEvents() {
-
+    public void addEvent(Event event) {
+        events.add(event);
     }
 
     public ArrayList<Event> getEvents() {
