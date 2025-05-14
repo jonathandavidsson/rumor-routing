@@ -47,17 +47,20 @@ public class Map {
     private void addNeighbours(ArrayList<Position> positions) {
         theInfo=new ArrayList<>();
 
-        for (Position pos1: positions) {
-            ArrayList<Position> pos1Neighbours = new ArrayList<>();
+        for (Position pos: positions) {
+            theInfo.add(new Node(pos));
+        }
 
-            for (Position pos2: positions) {
+        for (int i = 0; i < theInfo.size(); i++) {
+            Node node = theInfo.get(0);
+        }
 
-                if (!pos1.equals(pos2) && pos1.distance(pos2) <= nodeReach) {
-                    pos1Neighbours.add(pos2);
+        for (Node node1: theInfo) {
+            for (Node node2: theInfo) {
+                if (!node1.equals(node2) && node1.getPosition().distance(node2.getPosition()) <= nodeReach) {
+                    node1.addNeighbour(node2);
                 }
-                theInfo.add(new Node(pos1, pos1Neighbours));
             }
-            
         }
     }
 
