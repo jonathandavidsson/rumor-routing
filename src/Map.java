@@ -2,14 +2,15 @@ import java.util.*;
 
 public class Map {
     private ArrayList<Node> theInfo;
-    private ArrayList<Event> Events;
+    private ArrayList<Event> events;
     private ArrayList<Node> requestNodes;
-    private int nodeReach = 15;
+    private int nodeReach = 2;
 
     public Map(Scanner s) {
         ArrayList<Position> positions = readMazeDataToPositions(s);
         addNeighbours(positions);
         addRequestNodes();
+        events = new ArrayList<>();
     }
 
     /*
@@ -70,12 +71,16 @@ public class Map {
         }
     }
 
+    public Node getRandomNode() {
+        return theInfo.get((int) (Math.random() * theInfo.size()));
+    }
+
     public ArrayList<Node> getNodes() {
         return theInfo;
     }
 
-    public void updateEvents() {
-
+    public void addEvent(Event event) {
+        events.add(event);
     }
 
     public ArrayList<Event> getEvents() {

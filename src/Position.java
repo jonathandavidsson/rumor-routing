@@ -89,7 +89,7 @@ public class Position {
     public double distance(Position pos) {
         double xd = this.x - pos.x;
         double yd = this.y - pos.y;
-        return Math.sqrt(xd * xd + yd + yd);
+        return Math.sqrt(xd * xd + yd * yd);
     }
 
     /**
