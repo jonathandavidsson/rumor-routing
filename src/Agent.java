@@ -10,7 +10,7 @@ public class Agent {
     Set<Node> visitedNodes;
     int lifetime;
     ArrayList<Node> neighbours;
-    ArrayList<Position> movable;
+    ArrayList<Node> movable;
 
     public Agent(Node currentNode, Event event){
         this.currentNode = currentNode;
@@ -19,7 +19,7 @@ public class Agent {
     }
 
     public void traverse(){
-        if(lifetime == 50){
+        if(lifetime == 0){
             /* Avsluta robot. */
         }
         neighbours = new ArrayList<>();
@@ -29,11 +29,10 @@ public class Agent {
         visitedNodes.add(currentNode);
 
         if(!movable.isEmpty()){
-            Node tempNode = new Node(movable.get((int) (random() * movable.size())), neighbours);
-            currentNode = tempNode;
+            currentNode = movable.get((int) (random() * movable.size()));
+        }else{
+            lifetime = 0;
         }
-
-
 
     }
 
@@ -49,11 +48,11 @@ public class Agent {
         return events;
     }
 
-    private ArrayList<Position> getMovableNeighbours(ArrayList<Node> neighbours){
-        ArrayList<Position> movableNodes = new ArrayList<>();
+    private ArrayList<Node> getMovableNeighbours(ArrayList<Node> neighbours){
+        ArrayList<Node> movableNodes = new ArrayList<>();
         for(int i = 0; i < neighbours.size(); i++){
             if(!visitedNodes.contains(neighbours.get(i))){
-                movable.add(neighbours.get(i).getPosition());
+                movableNodes.add(neighbours.get(i));
             }
         }
         return movableNodes;

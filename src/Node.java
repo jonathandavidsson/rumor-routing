@@ -34,4 +34,7 @@ public class Node {
     public void addNeighbour(Node node){
         neighbours.add(node);
     }
+    public ArrayList<Node> getNeighbours() {
+        return neighbours;
+    }
 }
