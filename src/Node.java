@@ -7,8 +7,8 @@ public class Node {
     private ArrayList<Node> neighbours;
     private Position pos;
     private Event event;
-    //Hashtable<Event, ArrayList<Object>> eventInfo;
-    /*- events: Table<event: Event, direction: Position, shortest way: int*/
+    Hashtable<Event, ArrayList<Object>> eventInfo;
+
 
 
     public Node(Position pos){
@@ -30,6 +30,12 @@ public class Node {
 
     public void takeRequest(Request req){
 
+    }
+    public void takeAgentInfo(Event event, Node node, int distance){
+        ArrayList<Object> info = new ArrayList<>();
+        info.add(node);
+        info.add(distance);
+        eventInfo.put(event, info);
     }
     public void addNeighbour(Node node){
         neighbours.add(node);
