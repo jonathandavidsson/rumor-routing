@@ -42,7 +42,7 @@ public class Agent {
     }
 
     public Node getNode(){
-        return null;
+        return currentNode;
     }
 
     public Set<Node> getVisitedNodes(){
