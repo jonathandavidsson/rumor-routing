@@ -7,7 +7,7 @@ public class Node {
     private ArrayList<Node> neighbours;
     private Position pos;
     private Event event;
-    Hashtable<Event, ArrayList<Object>> eventInfo;
+    private Hashtable<Event, ArrayList<Object>> knownEvents;
 
 
 
@@ -31,12 +31,17 @@ public class Node {
     public void takeRequest(Request req){
 
     }
-    public void takeAgentInfo(Hashtable<Event, ArrayList<Object> info){
+
+    public Hashtable<Event, ArrayList<Object>> getKnownEvents() {
+        return knownEvents;
+    }
+
+    public void takeAgentInfo(Hashtable<Event, ArrayList<Object>> info){
         ArrayList<Event> keys = new ArrayList<>(info.keySet());
         for(int i = 0; i < info.size(); i++){
             Event e = keys.get(i);
             ArrayList<Object> agentInfo = info.get(e);
-            eventInfo.put(e, agentInfo);
+            knownEvents.put(e, agentInfo);
         }
     }
     public void addNeighbour(Node node){

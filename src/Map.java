@@ -87,7 +87,7 @@ public class Map {
     }
 
     public ArrayList<Event> getEvents() {
-        return Events;
+        return events;
     }
 
     public ArrayList<Node> getRequestNodes() {
