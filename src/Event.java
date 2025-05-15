@@ -37,4 +37,9 @@ public class Event {
     public boolean equals(Event event) {
         return eventId == event.eventId;
     }
+
+    @Override
+    public int hashCode(){
+        return eventId;
+    }
 }
