@@ -57,6 +57,13 @@ public class Request implements Messenger{
     }
 
     private boolean hasReachedEvent(){
-        return true;
+        ArrayList<Event> nodeEvents = new ArrayList<>(path.peek().getEventKeys());
+        for(int i = 0; i < nodeEvents.size(); i++){
+            Event e = nodeEvents.get(i);
+            if(e == event){
+                return true;
+            }
+        }
+        return false;
     }
 }
