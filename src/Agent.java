@@ -25,33 +25,31 @@ public class Agent {
     }
 
     public void traverse(){
-        if(lifetime == 0){
+        if(lifetime == 0){ //Om lifetime är noll, sluta gå
             return;
         }
-        deliverInformationToNode();
+        deliverInformationToNode(); //Denna funktion lämnar över agentens information till noden.
         ArrayList<Event> nodeKeys = new ArrayList<>(currentNode.getEventKeys());
-        for(int i = 0; i < nodeKeys.size(); i++){
-            Event e = nodeKeys.get(i);
+        for(int i = 0; i < nodeKeys.size(); i++){ //Denna for-loop kollar den nya nodens events efter nya, och om det finns lägger den in den infon i
+            Event e = nodeKeys.get(i);            //dess egna hashtabell "events".
             if(!events.containsKey(e)){
                 ArrayList<Object> nodeInfo = currentNode.getKnownEvents().get(e);
                 events.put(e, nodeInfo);
             }
         }
-        neighbours = new ArrayList<>();
-        movable = new ArrayList<>();
         neighbours = currentNode.getNeighbours();
         movable = getMovableNeighbours(neighbours);
         visitedNodes.add(currentNode);
 
-        if(!movable.isEmpty()){
+        if(!movable.isEmpty()){ //Flyttar på agenten så länge det finns en nod som den kan gå till (kan ha fastnat i ett hörn t.ex).
             prevNode = currentNode;
             currentNode = movable.get((int) (random() * movable.size()));
             lifetime = lifetime - 1;
         }else{
-            lifetime = 0;
+            lifetime = 0; //Om roboten inte kan röra sig sätter vi lifetime till 0 (agenten dör)
         }
         ArrayList<Event> keys = new ArrayList<>(events.keySet());
-        for(int i = 0; i < keys.size(); i++){
+        for(int i = 0; i < keys.size(); i++){ //Tillsist uppdaterar agenten distansen på alla sina events som agenten håller med + 1 (pga att agenten går ett steg).
             Event e = keys.get(i);
             ArrayList<Object> eventInfo = events.get(e);
             eventInfo.set(0, prevNode);
@@ -83,7 +81,6 @@ public class Agent {
     }
 
     private void deliverInformationToNode(){
-        /*Lämnar över information om event och vars agenten kom ifrån till nod.*/
         currentNode.takeAgentInfo(events);
     }
 
