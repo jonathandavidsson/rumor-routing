@@ -1,8 +1,9 @@
 public class Event {
-    int eventId;
-    int timeStep;
-    int shortestWayToEvent;
-    Position eventPosition;
+    private int eventId;
+    private int timeStep;
+    private int shortestWayToEvent;
+    private Position eventPosition;
+
     public Event(int eventId, int timeStep, Position eventPosition) {
         this.eventId = eventId;
         this.timeStep = timeStep;
@@ -31,5 +32,9 @@ public class Event {
     }
     public void printEvent() {
 
+    }
+
+    public boolean equals(Event event) {
+        return eventId == event.eventId;
     }
 }

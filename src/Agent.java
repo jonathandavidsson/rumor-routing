@@ -8,7 +8,7 @@ public class Agent {
 
     Node currentNode;
     Node prevNode;
-    Hashtable<Event, ArrayList<Object> events;
+    Hashtable<Event, ArrayList<Object>> events;
     Set<Node> visitedNodes;
     int lifetime;
     ArrayList<Node> neighbours;
@@ -65,9 +65,9 @@ public class Agent {
         return visitedNodes;
     }
 
-    public ArrayList<Event> getEvent(){
-        return events;
-    }
+//    public ArrayList<Event> getEvent(){
+//        return events;
+//    }
 
     private ArrayList<Node> getMovableNeighbours(ArrayList<Node> neighbours){
         ArrayList<Node> movableNodes = new ArrayList<>();

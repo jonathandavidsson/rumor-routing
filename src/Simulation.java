@@ -6,7 +6,7 @@ public class Simulation {
     private int timestep = 0;
     private ArrayList<Agent> agents;
     private ArrayList<Request> requests;
-    private double percentageOfEvents = 0.002;
+    private double percentChanceOfEvents = 0.002;
 
     public Simulation(Scanner s){
         map = new Map(s);
@@ -17,7 +17,7 @@ public class Simulation {
     public void updateTime(){
         timestep++;
 
-        if (Math.random() <= percentageOfEvents){
+        if (Math.random() <= percentChanceOfEvents){
             addEventToNode(map.getRandomNode());
         }
         if (!agents.isEmpty()) {
@@ -42,10 +42,10 @@ public class Simulation {
         map.addEvent(event);
     }
     public void createRequest(Event event){
-        requests.add(new Request());
+    //    requests.add(new Request());
     }
 
-    public void setPercentageOfEvents(double percentageOfEvents) {
-        this.percentageOfEvents = percentageOfEvents;
+    public void setPercentChanceOfEvents(double percentChanceOfEvents) {
+        this.percentChanceOfEvents = percentChanceOfEvents;
     }
 }
