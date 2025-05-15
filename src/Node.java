@@ -6,7 +6,6 @@ public class Node {
 
     private ArrayList<Node> neighbours;
     private Position pos;
-    private Event event;
     private Hashtable<Event, ArrayList<Object>> knownEvents;
 
 
@@ -14,14 +13,21 @@ public class Node {
     public Node(Position pos){
         this.pos = pos;
         neighbours = new ArrayList<>();
+        knownEvents = new Hashtable<>();
     }
 
     public Position getPosition(){
         return pos;
     }
+    public ArrayList<Node> getNeighbours() {
+        return neighbours;
+    }
+    public Hashtable<Event, ArrayList<Object>> getKnownEvents() {
+        return knownEvents;
+    }
 
-    public Event getEvent(){
-        return event;
+    public Event getEvent() {
+        return knownEvents.keys().nextElement();
     }
 
     public void setNearestEventDirection(Event event, Position pos){
@@ -32,9 +38,6 @@ public class Node {
 
     }
 
-    public Hashtable<Event, ArrayList<Object>> getKnownEvents() {
-        return knownEvents;
-    }
 
     public void takeAgentInfo(Hashtable<Event, ArrayList<Object>> info){
         ArrayList<Event> keys = new ArrayList<>(info.keySet());
@@ -46,8 +49,5 @@ public class Node {
     }
     public void addNeighbour(Node node){
         neighbours.add(node);
-    }
-    public ArrayList<Node> getNeighbours() {
-        return neighbours;
     }
 }
