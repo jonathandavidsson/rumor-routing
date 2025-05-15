@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Set;
 
@@ -9,7 +10,7 @@ public class Agent {
     Node currentNode;
     Node prevNode;
     Hashtable<Event, ArrayList<Object>> events;
-    Set<Node> visitedNodes;
+    Set<Node> visitedNodes = new HashSet<>();
     int lifetime;
     ArrayList<Node> neighbours;
     ArrayList<Node> movable;
@@ -28,11 +29,13 @@ public class Agent {
             return;
         }
         deliverInformationToNode();
-        if(currentNode.getEvent() != null && events.containsKey(currentNode.getEvent())){
-            ArrayList<Object> info = new ArrayList<>();
-            info.add(currentNode);
-            info.add(0);
-            events.put(currentNode.getEvent(),info);
+        ArrayList<Event> nodeKeys = new ArrayList<>(currentNode.getEventKeys());
+        for(int i = 0; i < nodeKeys.size(); i++){
+            Event e = nodeKeys.get(i);
+            if(!events.containsKey(e)){
+                ArrayList<Object> nodeInfo = currentNode.getKnownEvents().get(e);
+                events.put(e, nodeInfo);
+            }
         }
         neighbours = new ArrayList<>();
         movable = new ArrayList<>();

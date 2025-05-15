@@ -30,6 +30,10 @@ public class Node {
         return knownEvents.keys().nextElement();
     }
 
+    public Set<Event> getEventKeys(){
+        return knownEvents.keySet();
+    }
+
     public void setNearestEventDirection(Event event, Position pos){
 
     }
