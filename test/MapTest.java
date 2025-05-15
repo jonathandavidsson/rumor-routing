@@ -8,8 +8,12 @@ class MapTest {
     void getMap() throws FileNotFoundException {
         Scanner s = new Scanner(new File("layout.txt"));
         Map map = new Map(s);
-        System.out.println(map.getNodes().toString());
 
+        int i = 0;
+        for (Node node: map.getNodes()) {
+            assert node.getPosition().equals(new Position(i, i));
+            i++;
+        }
     }
 
     @org.junit.jupiter.api.Test

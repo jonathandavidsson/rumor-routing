@@ -28,12 +28,12 @@ public class Agent {
             return;
         }
         deliverInformationToNode();
-        if(currentNode.getEvent() != null && events.containsKey(currentNode.getEvent())){
+      //  if(currentNode.getEvent() != null && events.containsKey(currentNode.getEvent())){
             ArrayList<Object> info = new ArrayList<>();
             info.add(currentNode);
             info.add(0);
-            events.put(currentNode.getEvent(),info);
-        }
+          //  events.put(currentNode.getEvent(),info);
+       // }
         neighbours = new ArrayList<>();
         movable = new ArrayList<>();
         neighbours = currentNode.getNeighbours();

@@ -1,17 +1,19 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class EventTest {
 
     @org.junit.jupiter.api.Test
-    void getShortestWayToEvent() {
+    void getShortestWayToEvent() throws FileNotFoundException {
         Event event1 = new Event(0, 2, new Position(3, 5));
         Event event2 = new Event(0, 2, new Position(3, 5));
 
-        ArrayList<Event> arrayList = new ArrayList<>();
-        arrayList.add(event2);
-        System.out.println(arrayList.contains(event1));
+
     }
 
     @org.junit.jupiter.api.Test

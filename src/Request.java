@@ -21,10 +21,13 @@ public class Request implements Messenger{
      */
     public void traverse(){
 
-        if (path.peek().getKnownEvents().containsKey(event)) {
-            path.add((Node) path.peek().getKnownEvents().get(event).get(0));
-        }else {
-
+        for (Node node: path.peek().getNeighbours()) {
+            for (Event event: node.getKnownEvents()) {
+                if (event.equals(this.event)) {
+                    followPath();
+                    return;
+                }
+            }
         }
 
         ArrayList<Node> movableNeighbours = getMovableNeighbours(path.peek().getNeighbours());
@@ -36,6 +39,10 @@ public class Request implements Messenger{
 
         originNode = path.peek().getNeighbours().get(newNode);
 
+
+    }
+
+    private void followPath() {
 
     }
 

@@ -39,7 +39,7 @@ public class Simulation {
             Agent agent = new Agent(node, event);
             agents.add(agent);
         }
-        map.addEvent(event);
+        map.addEvent(event, node);
     }
     public void createRequest(Event event){
     //    requests.add(new Request());

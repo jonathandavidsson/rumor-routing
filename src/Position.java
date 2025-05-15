@@ -1,5 +1,3 @@
-import java.awt.geom.Point2D;
-
 /**
  * A class representing a position in a 2D grid
  * @author johane
@@ -47,38 +45,6 @@ public class Position {
      */
     public int getY() {
         return y;
-    }
-
-    /**
-     * Get the position to the north of this position
-     * @return the position to the north of this position
-     */
-    public Position getPosToNorth(){
-        return new Position(x,y-1);
-    }
-
-    /**
-     * Get the position to the south of this position
-     * @return the position to the south of this position
-     */
-    public Position getPosToSouth(){
-        return new Position(x,y+1);
-    }
-
-    /**
-     * Get the position to the west of this position
-     * @return the position to the west of this position
-     */
-    public Position getPosToWest(){
-        return new Position(x-1,y);
-    }
-
-    /**
-     * Get the position to the east of this position
-     * @return the position to the east of this position
-     */
-    public Position getPosToEast(){
-        return new Position(x+1,y);
     }
 
     /**

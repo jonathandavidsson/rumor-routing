@@ -82,7 +82,7 @@ public class Map {
         return theInfo;
     }
 
-    public void addEvent(Event event) {
+    public void addEvent(Event event, Node node) {
         events.add(event);
     }
 
