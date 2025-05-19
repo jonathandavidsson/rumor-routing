@@ -43,6 +43,11 @@ public class Node {
     }
 
 
+    public boolean equals(Node node) {
+        return node.getPosition().equals(pos);
+    }
+
+
     public void takeAgentInfo(Hashtable<Event, ArrayList<Object>> info){
         ArrayList<Event> keys = new ArrayList<>(info.keySet());
         for(int i = 0; i < info.size(); i++){
