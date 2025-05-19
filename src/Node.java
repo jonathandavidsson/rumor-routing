@@ -26,9 +26,6 @@ public class Node {
         return knownEvents;
     }
 
-    public ArrayList<Event> getEvent() {
-        return knownEvents;
-    }
 
     public void setNewEvent(Event event) {
         knownEvents.add(event);
