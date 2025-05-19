@@ -34,6 +34,12 @@ public class Node {
         return knownEvents.keySet();
     }
 
+    public void setNewEvent(Event event) {
+        ArrayList<Object> list = new ArrayList<Object>();
+        list.add(1, 0);
+        knownEvents.put(event, list);
+    }
+
     public void setNearestEventDirection(Event event, Position pos){
 
     }
@@ -41,6 +47,7 @@ public class Node {
     public void takeRequest(Request req){
 
     }
+
 
 
     public boolean equals(Node node) {

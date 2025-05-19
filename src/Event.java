@@ -27,7 +27,7 @@ public class Event {
         return eventId;
     }
 
-    public Node getEventPosition() {
+    public Node getEventNode() {
         return eventNode;
     }
     public void printEvent() {

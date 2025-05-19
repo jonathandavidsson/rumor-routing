@@ -84,6 +84,12 @@ public class Map {
 
     public void addEvent(Event event) {
         events.add(event);
+        for (Node node: theInfo) {
+            if (node.getPosition().equals(event.getEventNode().getPosition())){
+                node.setNewEvent(event);
+                return;
+            }
+        }
     }
 
     public ArrayList<Event> getEvents() {
