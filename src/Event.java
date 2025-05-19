@@ -5,11 +5,11 @@ public class Event {
     private Node eventNode;
     private Node nodeToEvent;
 
-    public Event(int eventId, int timeStep, Node eventNode) {
+    public Event(int eventId, int timeStep, Node eventNode, int distance) {
         this.eventId = eventId;
         this.timeStep = timeStep;
         this.eventNode = eventNode;
-        shortestWayToEvent = 0;
+        shortestWayToEvent = distance;
     }
 
     public int getShortestWayToEvent() {
@@ -24,9 +24,6 @@ public class Event {
         return timeStep;
     }
 
-    public void setNodeToEvent(Node node) {
-        nodeToEvent = node;
-    }
     public Node getNodeToEvent() {
         return nodeToEvent;
     }
@@ -40,6 +37,10 @@ public class Event {
     }
     public void printEvent() {
 
+    }
+
+    public void setNodeToEvent(Node node){
+        this.nodeToEvent = node;
     }
 
     public boolean equals(Event event) {

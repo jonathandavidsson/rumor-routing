@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -7,29 +8,28 @@ import static java.lang.Math.random;
 
 public class Agent {
 
-    Node currentNode;
-    Node prevNode;
-    Hashtable<Event, ArrayList<Object>> events;
-    Set<Node> visitedNodes = new HashSet<>();
-    int lifetime;
-    ArrayList<Node> neighbours;
-    ArrayList<Node> movable;
+    private Node currentNode;
+    private Node prevNode;
+    private ArrayList<Event> events;
+    private Set<Node> visitedNodes = new HashSet<>();
+    private int lifetime;
+    private ArrayList<Node> neighbours;
+    private ArrayList<Node> movable;
 
     public Agent(Node currentNode, Event event){
         this.currentNode = currentNode;
-        events = new Hashtable<>();
+        events = new ArrayList<>();
         ArrayList<Object> theInfo = new ArrayList<>();
-        theInfo.add(currentNode);
-        theInfo.add(0);
-        events.put(event, theInfo);
+        events.add(event);
+        this.lifetime = 50;
     }
 
     public void traverse(){
         if(lifetime == 0){ //Om lifetime är noll, sluta gå
             return;
         }
-        deliverInformationToNode(); //Denna funktion lämnar över agentens information till noden.
         checkEventsInNode();
+        putEventsInNode();
         neighbours = currentNode.getNeighbours();
         movable = getMovableNeighbours(neighbours);
         visitedNodes.add(currentNode);
@@ -44,24 +44,34 @@ public class Agent {
         updateDistance();
 
     }
+    public ArrayList<Event> getEvents(){
+        return events;
+    }
 
     private void updateDistance() {
-        ArrayList<Event> keys = new ArrayList<>(events.keySet());
-        for(int i = 0; i < keys.size(); i++){ //Tillsist uppdaterar agenten distansen på alla sina events som agenten håller med + 1 (pga att agenten går ett steg).
-            Event e = keys.get(i);
-            ArrayList<Object> eventInfo = events.get(e);
-            eventInfo.set(0, prevNode);
-            eventInfo.set(1, (int) eventInfo.get(1) + 1);
+        for(int i = 0; i < events.size(); i++){ //Tillsist uppdaterar agenten distansen på alla sina events som agenten håller med + 1 (pga att agenten går ett steg).
+            Event e = events.get(i);
+            e.setShortestWayToEvent(e.getShortestWayToEvent() + 1);
+            e.setNodeToEvent(prevNode);
         }
     }
 
     private void checkEventsInNode() {
-        ArrayList<Event> nodeKeys = new ArrayList<>(currentNode.getEventKeys());
-        for(int i = 0; i < nodeKeys.size(); i++){ //Denna for-loop kollar den nya nodens events efter nya, och om det finns lägger den in den infon i
-            Event e = nodeKeys.get(i);            //dess egna hashtabell "events".
-            if(!events.containsKey(e)){
-                ArrayList<Object> nodeInfo = currentNode.getKnownEvents().get(e);
-                events.put(e, nodeInfo);
+        ArrayList<Event> eventsInNode = currentNode.getKnownEvents();
+        for(int i = 0; i < eventsInNode.size(); i++){ //Denna for-loop kollar den nya nodens events efter nya, och om det finns lägger den in den infon i
+            Event e = eventsInNode.get(i);            //dess egna hashtabell "events".
+            if(!events.contains(e)){
+               events.add(e);
+            }
+        }
+    }
+    private void putEventsInNode(){
+        ArrayList<Event> eventsInNode = currentNode.getKnownEvents();
+        for(int i = 0; i < events.size(); i++){
+            for(int j = 0; j < eventsInNode.size(); j++){
+                if(!(events.get(i) == eventsInNode.get(j))){
+                    eventsInNode.add(new Event(eventsInNode.get(j).getEventId(), eventsInNode.get(j).getTimeStep(), eventsInNode.get(j).getEventNode(), eventsInNode.get(j).getShortestWayToEvent()));
+                }
             }
         }
     }
@@ -84,8 +94,5 @@ public class Agent {
         return movableNodes;
     }
 
-    private void deliverInformationToNode(){
-        currentNode.takeAgentInfo(events);
-    }
 
 }
