@@ -6,14 +6,14 @@ public class Node {
 
     private ArrayList<Node> neighbours;
     private Position pos;
-    private Hashtable<Event, ArrayList<Object>> knownEvents;
+    private ArrayList<Event> knownEvents;
 
 
 
     public Node(Position pos){
         this.pos = pos;
         neighbours = new ArrayList<>();
-        knownEvents = new Hashtable<>();
+        knownEvents = new ArrayList<>();
     }
 
     public Position getPosition(){
@@ -22,22 +22,16 @@ public class Node {
     public ArrayList<Node> getNeighbours() {
         return neighbours;
     }
-    public Hashtable<Event, ArrayList<Object>> getKnownEvents() {
+    public ArrayList<Event> getKnownEvents() {
         return knownEvents;
     }
 
-    public Event getEvent() {
-        return knownEvents.keys().nextElement();
-    }
-
-    public Set<Event> getEventKeys(){
-        return knownEvents.keySet();
+    public ArrayList<Event> getEvent() {
+        return knownEvents;
     }
 
     public void setNewEvent(Event event) {
-        ArrayList<Object> list = new ArrayList<Object>();
-        list.add(1, 0);
-        knownEvents.put(event, list);
+        knownEvents.add(event);
     }
 
     public void setNearestEventDirection(Event event, Position pos){
@@ -55,14 +49,14 @@ public class Node {
     }
 
 
-    public void takeAgentInfo(Hashtable<Event, ArrayList<Object>> info){
-        ArrayList<Event> keys = new ArrayList<>(info.keySet());
-        for(int i = 0; i < info.size(); i++){
-            Event e = keys.get(i);
-            ArrayList<Object> agentInfo = info.get(e);
-            knownEvents.put(e, agentInfo);
-        }
-    }
+//    public void takeAgentInfo(Hashtable<Event, ArrayList<Object>> info){
+//        ArrayList<Event> keys = new ArrayList<>(info.keySet());
+//        for(int i = 0; i < info.size(); i++){
+//            Event e = keys.get(i);
+//            ArrayList<Object> agentInfo = info.get(e);
+//            knownEvents.put(e, agentInfo);
+//        }
+//    }
     public void addNeighbour(Node node){
         neighbours.add(node);
     }

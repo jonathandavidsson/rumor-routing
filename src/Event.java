@@ -3,6 +3,7 @@ public class Event {
     private int timeStep;
     private int shortestWayToEvent;
     private Node eventNode;
+    private Node nodeToEvent;
 
     public Event(int eventId, int timeStep, Node eventNode) {
         this.eventId = eventId;
@@ -21,6 +22,13 @@ public class Event {
 
     public int getTimeStep() {
         return timeStep;
+    }
+
+    public void setNodeToEvent(Node node) {
+        nodeToEvent = node;
+    }
+    public Node getNodeToEvent() {
+        return nodeToEvent;
     }
 
     public int getEventId() {

@@ -9,7 +9,7 @@ public class Map {
     public Map(Scanner s) {
         ArrayList<Position> positions = readMazeDataToPositions(s);
         addNeighbours(positions);
-        addRequestNodes();
+        add4RequestNodes();
         events = new ArrayList<>();
     }
 
@@ -67,7 +67,7 @@ public class Map {
     /*
      *chooses random nodes that will send out a request.
      */
-    private void addRequestNodes(){
+    private void add4RequestNodes(){
         requestNodes = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             requestNodes.add(theInfo.get( (int) (Math.random() * theInfo.size())));
