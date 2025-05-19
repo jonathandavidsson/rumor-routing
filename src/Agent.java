@@ -29,14 +29,7 @@ public class Agent {
             return;
         }
         deliverInformationToNode(); //Denna funktion lämnar över agentens information till noden.
-        ArrayList<Event> nodeKeys = new ArrayList<>(currentNode.getEventKeys());
-        for(int i = 0; i < nodeKeys.size(); i++){ //Denna for-loop kollar den nya nodens events efter nya, och om det finns lägger den in den infon i
-            Event e = nodeKeys.get(i);            //dess egna hashtabell "events".
-            if(!events.containsKey(e)){
-                ArrayList<Object> nodeInfo = currentNode.getKnownEvents().get(e);
-                events.put(e, nodeInfo);
-            }
-        }
+        checkEventsInNode();
         neighbours = currentNode.getNeighbours();
         movable = getMovableNeighbours(neighbours);
         visitedNodes.add(currentNode);
@@ -48,6 +41,11 @@ public class Agent {
         }else{
             lifetime = 0; //Om roboten inte kan röra sig sätter vi lifetime till 0 (agenten dör)
         }
+        updateDistance();
+
+    }
+
+    private void updateDistance() {
         ArrayList<Event> keys = new ArrayList<>(events.keySet());
         for(int i = 0; i < keys.size(); i++){ //Tillsist uppdaterar agenten distansen på alla sina events som agenten håller med + 1 (pga att agenten går ett steg).
             Event e = keys.get(i);
@@ -55,7 +53,17 @@ public class Agent {
             eventInfo.set(0, prevNode);
             eventInfo.set(1, (int) eventInfo.get(1) + 1);
         }
+    }
 
+    private void checkEventsInNode() {
+        ArrayList<Event> nodeKeys = new ArrayList<>(currentNode.getEventKeys());
+        for(int i = 0; i < nodeKeys.size(); i++){ //Denna for-loop kollar den nya nodens events efter nya, och om det finns lägger den in den infon i
+            Event e = nodeKeys.get(i);            //dess egna hashtabell "events".
+            if(!events.containsKey(e)){
+                ArrayList<Object> nodeInfo = currentNode.getKnownEvents().get(e);
+                events.put(e, nodeInfo);
+            }
+        }
     }
 
     public Node getNode(){
@@ -65,10 +73,6 @@ public class Agent {
     public Set<Node> getVisitedNodes(){
         return visitedNodes;
     }
-
-//    public ArrayList<Event> getEvent(){
-//        return events;
-//    }
 
     private ArrayList<Node> getMovableNeighbours(ArrayList<Node> neighbours){
         ArrayList<Node> movableNodes = new ArrayList<>();

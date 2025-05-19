@@ -2,12 +2,12 @@ public class Event {
     private int eventId;
     private int timeStep;
     private int shortestWayToEvent;
-    private Position eventPosition;
+    private Node eventNode;
 
-    public Event(int eventId, int timeStep, Position eventPosition) {
+    public Event(int eventId, int timeStep, Node eventNode) {
         this.eventId = eventId;
         this.timeStep = timeStep;
-        this.eventPosition = eventPosition;
+        this.eventNode = eventNode;
         shortestWayToEvent = 0;
     }
 
@@ -27,8 +27,8 @@ public class Event {
         return eventId;
     }
 
-    public Position getEventPosition() {
-        return eventPosition;
+    public Node getEventPosition() {
+        return eventNode;
     }
     public void printEvent() {
 
