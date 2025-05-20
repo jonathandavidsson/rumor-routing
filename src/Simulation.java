@@ -41,9 +41,9 @@ public class Simulation {
         }
         map.addEvent(event);
     }
-    public void createRequest(Event event){
+    //public void createRequest(Event event){
     //    requests.add(new Request());
-    }
+    //}
 
     public void setPercentChanceOfEvents(double percentChanceOfEvents) {
         this.percentChanceOfEvents = percentChanceOfEvents;

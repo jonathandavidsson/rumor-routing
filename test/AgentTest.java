@@ -2,9 +2,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Scanner;
+import java.util.*;
 
 import static java.lang.Math.random;
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +28,7 @@ class AgentTest {
         assertNotEquals(node, node2, "The agent should have moved!");
     }
     @org.junit.jupiter.api.Test
-    void traverseUpdateEvents(){
+    void traverseUpdateEventDistance(){
         ArrayList<Event> events = agent.getEvents();
         int eventDistance = events.getFirst().getShortestWayToEvent();
         agent.traverse();
@@ -46,15 +44,20 @@ class AgentTest {
         int eventsAfter = node.getKnownEvents().size();
         assertNotEquals(eventsBefore, eventsAfter, "The events should have been updated!");
     }
-
-
     @org.junit.jupiter.api.Test
-    void getNode() {
+    void traverseAddEventsInAgent(){
 
     }
 
     @org.junit.jupiter.api.Test
-    void getVisitedNodes() {
+    void getNode() {
+        Node node = agent.getNode();
+        assertNotNull(node, "Node should have been returned!");
+    }
 
+    @org.junit.jupiter.api.Test
+    void getVisitedNodes() {
+        Set<Node> visitedNodes = agent.getVisitedNodes();
+        assertNotNull(visitedNodes, "visitedNodes set should have been returned!");
     }
 }
