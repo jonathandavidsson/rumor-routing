@@ -39,8 +39,6 @@ public class Node {
 
     //}
 
-
-
     public boolean equals(Node node) {
         return node.getPosition().equals(pos);
     }
