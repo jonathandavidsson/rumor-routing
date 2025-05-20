@@ -48,9 +48,10 @@ public class Event {
     }
 
     public Event cloneEvent(){
-        Event clone = new Event(this.eventId,
+        Event clone = new Event(
+                  this.eventId,
                   this.timeStep,
-                  this.nodeToEvent,
+                  this.eventNode,
                   this.shortestWayToEvent);
         return clone;
     }

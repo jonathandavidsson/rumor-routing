@@ -44,7 +44,9 @@ class EventTest {
     }
 
     @org.junit.jupiter.api.Test
-    void getEventPosition() {
+    void getEventNode() {
+        Node n = event.getEventNode();
+        assertEquals(n, this.node, "The nodes should be the same!");
     }
 
     @org.junit.jupiter.api.Test
@@ -52,6 +54,30 @@ class EventTest {
     }
 
     @org.junit.jupiter.api.Test
-    void testEquals() {
+    void cloneEvent(){
+        Event e = event.cloneEvent();
+
+        assertNotSame(e, this.event, "The events should be different objects!");
+
+        assertEquals(e.getTimeStep(), this.event.getTimeStep(), "Timestep should be the same!");
+        assertEquals(e.getEventId(), this.event.getEventId(), "EventId should be the same!");
+        assertEquals(e.getEventNode(), this.event.getEventNode(), "EventNode should be the same!");
+        assertEquals(e.getShortestWayToEvent(), this.event.getShortestWayToEvent(), "Distance should be the same!");
     }
+
+    @org.junit.jupiter.api.Test
+    void testEqualsTrue() {
+        Event e = event.cloneEvent();
+        boolean test = event.equals(e);
+        assertTrue(test, "The events should be the equal!");
+    }
+
+    @org.junit.jupiter.api.Test
+    void testEqualsFalse(){
+        Event e = new Event(1, 1, node, 0);
+        boolean test = event.equals(e);
+        assertFalse(test, "The events should not be equal!");
+    }
+
+
 }
