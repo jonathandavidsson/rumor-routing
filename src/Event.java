@@ -47,8 +47,18 @@ public class Event {
         return eventId == event.eventId;
     }
 
+    public Event cloneEvent(){
+        Event clone = new Event(this.eventId,
+                  this.timeStep,
+                  this.nodeToEvent,
+                  this.shortestWayToEvent);
+        return clone;
+    }
+
     @Override
     public int hashCode(){
         return eventId;
     }
+
+
 }

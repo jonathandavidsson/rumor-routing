@@ -49,7 +49,7 @@ public class Agent {
     }
 
     private void updateDistance() {
-        for(int i = 0; i < events.size(); i++){ //Tillsist uppdaterar agenten distansen på alla sina events som agenten håller med + 1 (pga att agenten går ett steg).
+        for(int i = 0; i < events.size(); i++){
             Event e = events.get(i);
             e.setShortestWayToEvent(e.getShortestWayToEvent() + 1);
             e.setNodeToEvent(prevNode);
@@ -58,8 +58,8 @@ public class Agent {
 
     private void checkEventsInNode() {
         ArrayList<Event> eventsInNode = currentNode.getKnownEvents();
-        for(int i = 0; i < eventsInNode.size(); i++){ //Denna for-loop kollar den nya nodens events efter nya, och om det finns lägger den in den infon i
-            Event e = eventsInNode.get(i);            //dess egna hashtabell "events".
+        for(int i = 0; i < eventsInNode.size(); i++){
+            Event e = eventsInNode.get(i);
             if(!events.contains(e)){
                events.add(e);
             }
@@ -70,7 +70,8 @@ public class Agent {
         for(int i = 0; i < events.size(); i++){
             for(int j = 0; j < eventsInNode.size(); j++){
                 if(!(events.get(i) == eventsInNode.get(j))){
-                    eventsInNode.add(new Event(eventsInNode.get(j).getEventId(), eventsInNode.get(j).getTimeStep(), eventsInNode.get(j).getEventNode(), eventsInNode.get(j).getShortestWayToEvent()));
+                    Event e = events.get(i).cloneEvent();
+                    eventsInNode.add(e);
                 }
             }
         }

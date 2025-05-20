@@ -31,12 +31,10 @@ class AgentTest {
     }
     @org.junit.jupiter.api.Test
     void traverseUpdateEvents(){
-        Hashtable<Event, ArrayList<Object>> info = agent.getEvents();
-        Event e = info.keys().nextElement();
-        int eventDistance = (int) info.get(e).get(1);
+        ArrayList<Event> events = agent.getEvents();
+        int eventDistance = events.getFirst().getShortestWayToEvent();
         agent.traverse();
-        Hashtable<Event, ArrayList<Object>> infoAfter = agent.getEvents();
-        int eventDistance2 = (int) infoAfter.get(e).get(1);
+        int eventDistance2 = events.getFirst().getShortestWayToEvent();
         assertNotEquals(eventDistance, eventDistance2, "The distance should have been updated!");
 
     }
