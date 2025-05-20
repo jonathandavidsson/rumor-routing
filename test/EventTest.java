@@ -6,8 +6,8 @@ class EventTest {
 
     @org.junit.jupiter.api.Test
     void getShortestWayToEvent() {
-        Event event1 = new Event(0, 2, new Node(new Position(3, 5)));
-        Event event2 = new Event(0, 2, new Node(new Position(3, 5)));
+        Event event1 = new Event(0, 2, new Node(new Position(3, 5)), 0);
+        Event event2 = new Event(0, 2, new Node(new Position(3, 5)), 0);
 
         ArrayList<Event> arrayList = new ArrayList<>();
         arrayList.add(event2);

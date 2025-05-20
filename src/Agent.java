@@ -68,11 +68,17 @@ public class Agent {
     private void putEventsInNode(){
         ArrayList<Event> eventsInNode = currentNode.getKnownEvents();
         for(int i = 0; i < events.size(); i++){
+            Event agentEvent = events.get(i);
+            boolean alreadyInNode = false;
             for(int j = 0; j < eventsInNode.size(); j++){
-                if(!(events.get(i) == eventsInNode.get(j))){
-                    Event e = events.get(i).cloneEvent();
-                    eventsInNode.add(e);
+                Event nodeEvent = eventsInNode.get(j);
+                if(agentEvent.equals(nodeEvent)){
+                    alreadyInNode = true;
+                    break;
                 }
+            }
+            if(!alreadyInNode){
+                eventsInNode.add(agentEvent.cloneEvent());
             }
         }
     }

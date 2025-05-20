@@ -18,7 +18,7 @@ class AgentTest {
         Map map = new Map(s);
         ArrayList<Node> nodes = new ArrayList<>(map.getNodes());
         Node node = nodes.get((int) (random() * nodes.size()));
-        Event event = new Event(1, 1, node);
+        Event event = new Event(0, 0, node, 0);
         agent = new Agent(node, event);
     }
 
@@ -37,6 +37,14 @@ class AgentTest {
         int eventDistance2 = events.getFirst().getShortestWayToEvent();
         assertNotEquals(eventDistance, eventDistance2, "The distance should have been updated!");
 
+    }
+    @org.junit.jupiter.api.Test
+    void traverseAddEventsInNode(){
+        Node node = agent.getNode();
+        int eventsBefore = node.getKnownEvents().size();
+        agent.traverse();
+        int eventsAfter = node.getKnownEvents().size();
+        assertNotEquals(eventsBefore, eventsAfter, "The events should have been updated!");
     }
 
 

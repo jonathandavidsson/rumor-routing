@@ -33,7 +33,7 @@ public class Simulation {
     }
 
     private void addEventToNode(Node node){
-        Event event = new Event(0, timestep, node);
+        Event event = new Event(0, timestep, node, 0);
         int coinflip = (int) (Math.random() * 2);
         if (coinflip == 1){
             Agent agent = new Agent(node, event);
