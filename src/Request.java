@@ -52,17 +52,24 @@ public class Request {
     }
 
     private boolean hasReachedOriginNode(){
-        return path.peek().equals(originNode);
+        if (!path.isEmpty()){
+            return path.peek().equals(originNode);
+        }
+        return false;
     }
 
     private boolean followAPathToEvent() {
-        for (Event event: getCurrentNode().getKnownEvents()) {
-            //if the node request is on knows a path to a event then this function follows it.
-            if (event.equals(this.event)){
-                path.push(event.getNodeToEvent());
-                return true;
+        if (!getCurrentNode().getKnownEvents().isEmpty())
+        {
+            for (Event event: getCurrentNode().getKnownEvents()) {
+                //if the node request is on knows a path to a event then this function follows it.
+                if (event.equals(this.event)){
+                    path.push(event.getNodeToEvent());
+                    return true;
+                }
             }
         }
+
         return false;
     }
 
@@ -70,7 +77,6 @@ public class Request {
         if (!path.empty()) {
             path.pop();
         }
-        else throw new RuntimeException();
     }
     private void getEventInNode(){
         //TODO nothing needs to be done, because the request already knows the event.
@@ -84,7 +90,7 @@ public class Request {
 
     }
 
-    private Node getCurrentNode() {
+    public Node getCurrentNode() {
         return path.peek();
     }
 
@@ -101,9 +107,11 @@ public class Request {
 
     private boolean hasReachedEvent(){
 
-        for (Event event: getCurrentNode().getKnownEvents()) {
-            if(event.equals(this.event) && event.getShortestWayToEvent() == 0){
-                return true;
+        if (!getCurrentNode().getKnownEvents().isEmpty()){
+            for (Event event: getCurrentNode().getKnownEvents()) {
+                if(event.equals(this.event) && event.getShortestWayToEvent() == 0){
+                    return true;
+                }
             }
         }
         return false;
@@ -112,7 +120,7 @@ public class Request {
     public Event getEvent(){
         return event;
     }
-    public Node getNode(){
+    public Node getOrginNode(){
         return originNode;
     }
     public boolean isDead(){

@@ -103,5 +103,22 @@ public class Map {
     public void setNodeReach(int reach){
         nodeReach = reach;
     }
+
+    @Override
+    public String toString(){
+        StringBuilder stringBuilder = new StringBuilder(new String());
+        int y =  theInfo.get(0).getPosition().getY();
+        for (Node node : theInfo){
+            if (y != node.getPosition().getY()){
+                stringBuilder.append("\n").append(node.getPosition().toString()).append(" ");
+            } else {
+                stringBuilder.append(node.getPosition().toString()).append(" ");
+            }
+            y = node.getPosition().getY();
+        }
+
+        return stringBuilder.toString();
+    }
+
 }
 
