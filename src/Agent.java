@@ -36,6 +36,9 @@ public class Agent {
 
         if(!movable.isEmpty()){ //Flyttar på agenten så länge det finns en nod som den kan gå till (kan ha fastnat i ett hörn t.ex).
             prevNode = currentNode;
+            for (Event event : events) {
+                event.setNodeToEvent(prevNode);
+            }
             currentNode = movable.get((int) (random() * movable.size()));
             lifetime = lifetime - 1;
         }else{

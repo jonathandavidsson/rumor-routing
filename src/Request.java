@@ -7,6 +7,7 @@ public class Request {
     private Event event;
     private int lifeTime = 15;
     private Stack<Node> path;
+    private Node currentNode;
     private boolean goBack;
 
     public Request (Node node, Event event){
@@ -14,6 +15,7 @@ public class Request {
         originNode = node;
         path = new Stack<>();
         path.push(originNode);
+        currentNode = originNode;
         goBack = false;
 
     }
@@ -23,18 +25,19 @@ public class Request {
      * else look if the node knows a event to the node
      * else takes a random path.
      */
-    public void traverse(){
+    public boolean traverse(){
 
         if (lifeTime <= 0){
             throw new IsDeadException();
         }
 
         if (goBack){
-            if (hasReachedOriginNode()){
+            if (!hasReachedOriginNode()){
                 traverseBackToNode();
             }
             lifeTime--;
-            return;
+            System.out.println("go back");
+            return false;
         }
 
         if (hasReachedEvent()){
@@ -42,20 +45,25 @@ public class Request {
             traverseBackToNode();
             goBack = true;
             lifeTime--;
-            return;
+            System.out.println("has reached event");
+            return false;
         }
 
         if(!followAPathToEvent()){
             moveToRandomNode();
             lifeTime--;
+            System.out.println("follow path to event");
+            return false;
         }
+        if ((goBack && originNode.equals(currentNode )) || originNode.equals(event.getEventNode())){
+            System.out.println("WHATTT");
+            return true;
+        }
+        return false;
     }
 
     private boolean hasReachedOriginNode(){
-        if (!path.isEmpty()){
-            return path.peek().equals(originNode);
-        }
-        return false;
+        return currentNode.equals(originNode);
     }
 
     private boolean followAPathToEvent() {
@@ -63,8 +71,9 @@ public class Request {
         {
             for (Event event: getCurrentNode().getKnownEvents()) {
                 //if the node request is on knows a path to a event then this function follows it.
-                if (event.equals(this.event)){
+                if (event.equals(this.event) && event.getNodeToEvent() != null){
                     path.push(event.getNodeToEvent());
+                    currentNode = event.getNodeToEvent();
                     return true;
                 }
             }
@@ -75,7 +84,7 @@ public class Request {
 
     private void traverseBackToNode(){
         if (!path.empty()) {
-            path.pop();
+            currentNode = path.pop();
         }
     }
     private void getEventInNode(){
@@ -85,13 +94,19 @@ public class Request {
     private void moveToRandomNode(){
         ArrayList<Node> movableNeighbours = getMovableNeighbours(getCurrentNode().getNeighbours());
 
-        int newNode = (int)(movableNeighbours.size() * Math.random());
-        path.push(movableNeighbours.get(newNode));
+        if (!movableNeighbours.isEmpty()){
+            int newNode = (int)(movableNeighbours.size() * Math.random());
+            path.push(movableNeighbours.get(newNode));
+            currentNode = movableNeighbours.get(newNode);
+        }
+        else {
+            lifeTime = 0;
+        }
 
     }
 
     public Node getCurrentNode() {
-        return path.peek();
+        return currentNode;
     }
 
     private ArrayList<Node> getMovableNeighbours(ArrayList<Node> neighbours){
@@ -106,12 +121,13 @@ public class Request {
     }
 
     private boolean hasReachedEvent(){
+        if (currentNode.equals(event.getEventNode())) {
+            return true;
+        }
 
-        if (!getCurrentNode().getKnownEvents().isEmpty()){
-            for (Event event: getCurrentNode().getKnownEvents()) {
-                if(event.equals(this.event) && event.getShortestWayToEvent() == 0){
-                    return true;
-                }
+        for (Event event: getCurrentNode().getKnownEvents()) {
+            if(event.equals(this.event) && event.getShortestWayToEvent() == 0){
+                return true;
             }
         }
         return false;
@@ -124,7 +140,7 @@ public class Request {
         return originNode;
     }
     public boolean isDead(){
-        return lifeTime == 0;
+        return lifeTime <= 0;
     }
 
 }

@@ -7,7 +7,7 @@ class MapTest {
     @org.junit.jupiter.api.Test
     void getMap() throws FileNotFoundException {
         Scanner s = new Scanner(new File("layout.txt"));
-        Map map = new Map(s);
+        Map map = new Map(s, 1);
         int i = 0;
         for (Node node: map.getNodes()) {
             assert node.equals(new Node(new Position(i, i)));
@@ -23,7 +23,7 @@ class MapTest {
     @org.junit.jupiter.api.Test
     void getEvents() throws FileNotFoundException {
         Scanner s = new Scanner(new File("layout.txt"));
-        Map map = new Map(s);
+        Map map = new Map(s, 1);
 
         System.out.println(map.getEvents().toString());
     }
@@ -31,7 +31,7 @@ class MapTest {
     @org.junit.jupiter.api.Test
     void getRequestNodes() throws FileNotFoundException {
         Scanner s = new Scanner(new File("layout.txt"));
-        Map map = new Map(s);
+        Map map = new Map(s, 1);
         System.out.println(map.getRequestNodes().size());
 
     }

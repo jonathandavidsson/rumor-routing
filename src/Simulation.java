@@ -9,7 +9,7 @@ public class Simulation {
     private double percentChanceOfEvents;
 
     public Simulation(Scanner s){
-        map = new Map(s);
+        map = new Map(s, 1); //TODO
         agents = new ArrayList<>();
         requests = new ArrayList<>();
         percentChanceOfEvents = 0.002;
@@ -28,13 +28,15 @@ public class Simulation {
         }
         if (!requests.isEmpty()) {
             for (Request request: requests) {
-                request.traverse();
+                if (request.traverse()){
+                    System.out.println(request.getEvent().getEventId());
+                }
             }
         }
     }
 
     private void addEventToNode(Node node){
-        Event event = new Event(0, timestep, node, 0);
+        Event event = new Event(timestep, timestep, node, 0);
         int coinflip = (int) (Math.random() * 2);
         if (coinflip == 1){
             Agent agent = new Agent(node, event);

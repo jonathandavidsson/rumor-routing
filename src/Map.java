@@ -4,13 +4,14 @@ public class Map {
     private ArrayList<Node> theInfo;
     private ArrayList<Event> events;
     private ArrayList<Node> requestNodes;
-    private int nodeReach = 2;
+    private int nodeReach;
 
-    public Map(Scanner s) {
+    public Map(Scanner s, int nodeReach) {
         ArrayList<Position> positions = readMazeDataToPositions(s);
         addNeighbours(positions);
         add4RequestNodes();
         events = new ArrayList<>();
+        this.nodeReach = nodeReach;
     }
 
     /*

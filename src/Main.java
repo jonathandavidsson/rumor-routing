@@ -21,18 +21,20 @@ public class Main{
        // Map map = new Map(scanner);
         sim.setPercentChanceOfEvents(1);
         sim.updateTime();
-        //System.out.println(sim.getMap().getEvents().get(0).getEventNode().getPosition().toString());
-        //System.out.println(sim.getMap().getNodes().get(0).getPosition().toString());
-        sim.createRequest(sim.getMap().getNodes().get(0), sim.getMap().getEvents().get(0));
-      //  System.out.println(sim);
-       // while (!sim.getRequests().get(0).isDead()){
-        for (int i = 0; i < 20; i++) {
-            sim.updateTime();
+        System.out.print("\nNode0,0 neigbours:");
+        for(Node node : sim.getMap().getNodes().get(0).getNeighbours() ) {
+            System.out.println(node.getPosition().toString() + " ");
         }
-      //      System.out.println( sim.getRequests().get(0).getNode().getPosition().toString());
-       // }
-        System.out.println(sim);
+        System.out.println("Event Position;" + sim.getMap().getEvents().get(0).getEventNode().getPosition().toString());
+        System.out.println("********************");
+        sim.createRequest(sim.getMap().getNodes().get(0), sim.getMap().getEvents().get(0));
 
+        do{
+            System.out.println("Request position:" + sim.getRequests().get(0).getCurrentNode().getPosition().toString());
+            for(Node node : sim.getRequests().get(0).getCurrentNode().getNeighbours()) {
+                System.out.println(node.getPosition().toString() + " ");
+            }
+            sim.updateTime();
+        }while (!sim.getRequests().get(0).isDead());
     }
-
 }
