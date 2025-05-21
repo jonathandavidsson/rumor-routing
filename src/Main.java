@@ -17,7 +17,7 @@ public class Main{
                         "8,8\n" +
                         "9,9");
 
-        Simulation sim = new Simulation(scanner);
+        Simulation sim = new Simulation(scanner, 2);
        // Map map = new Map(scanner);
         sim.setPercentChanceOfEvents(1);
         sim.updateTime();

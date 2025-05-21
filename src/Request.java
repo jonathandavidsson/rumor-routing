@@ -35,7 +35,6 @@ public class Request {
             if (!hasReachedOriginNode()){
                 traverseBackToNode();
             }
-            lifeTime--;
             System.out.println("go back");
             return false;
         }

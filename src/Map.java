@@ -7,11 +7,11 @@ public class Map {
     private int nodeReach;
 
     public Map(Scanner s, int nodeReach) {
+        this.nodeReach = nodeReach;
         ArrayList<Position> positions = readMazeDataToPositions(s);
         addNeighbours(positions);
         add4RequestNodes();
         events = new ArrayList<>();
-        this.nodeReach = nodeReach;
     }
 
     /*

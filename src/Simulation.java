@@ -8,8 +8,8 @@ public class Simulation {
     private ArrayList<Request> requests;
     private double percentChanceOfEvents;
 
-    public Simulation(Scanner s){
-        map = new Map(s, 1); //TODO
+    public Simulation(Scanner s, int nodeReach){
+        map = new Map(s, nodeReach); //TODO
         agents = new ArrayList<>();
         requests = new ArrayList<>();
         percentChanceOfEvents = 0.002;
