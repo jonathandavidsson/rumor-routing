@@ -13,7 +13,7 @@ class AgentTest {
     @BeforeEach
     void setup()throws IOException {
         Scanner s = new Scanner(new File("layout.txt"));
-        Map map = new Map(s);
+        Map map = new Map(s, 2);
         ArrayList<Node> nodes = new ArrayList<>(map.getNodes());
         Node node = nodes.get((int) (random() * nodes.size()));
         Event event = new Event(0, 0, node, 0);

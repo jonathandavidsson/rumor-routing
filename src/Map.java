@@ -4,9 +4,10 @@ public class Map {
     private ArrayList<Node> theInfo;
     private ArrayList<Event> events;
     private ArrayList<Node> requestNodes;
-    private int nodeReach = 2;
+    private int nodeReach;
 
-    public Map(Scanner s) {
+    public Map(Scanner s, int nodeReach) {
+        this.nodeReach = nodeReach;
         ArrayList<Position> positions = readMazeDataToPositions(s);
         addNeighbours(positions);
         add4RequestNodes();
@@ -103,5 +104,22 @@ public class Map {
     public void setNodeReach(int reach){
         nodeReach = reach;
     }
+
+    @Override
+    public String toString(){
+        StringBuilder stringBuilder = new StringBuilder(new String());
+        int y =  theInfo.get(0).getPosition().getY();
+        for (Node node : theInfo){
+            if (y != node.getPosition().getY()){
+                stringBuilder.append("\n").append(node.getPosition().toString()).append(" ");
+            } else {
+                stringBuilder.append(node.getPosition().toString()).append(" ");
+            }
+            y = node.getPosition().getY();
+        }
+
+        return stringBuilder.toString();
+    }
+
 }
 
