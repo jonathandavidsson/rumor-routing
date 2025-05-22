@@ -39,10 +39,19 @@ public class Node {
 
     //}
 
-    public boolean equals(Node node) {
-        return node.getPosition().equals(pos);
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Node)) {
+            return false;
+        }
+        Node node=(Node)obj;
+        return node.getPosition().equals(getPosition());
     }
 
+    @Override
+    public int hashCode() {
+        return pos.hashCode();
+    }
 
 //    public void takeAgentInfo(Hashtable<Event, ArrayList<Object>> info){
 //        ArrayList<Event> keys = new ArrayList<>(info.keySet());

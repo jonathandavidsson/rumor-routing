@@ -32,32 +32,36 @@ public class Request {
         }
 
         if (goBack){
+            System.out.println("go back");
             if (!hasReachedOriginNode()){
                 traverseBackToNode();
+            } else {
+                lifeTime = 0;
+                return true;
             }
-            System.out.println("go back");
             return false;
         }
 
         if (hasReachedEvent()){
+            System.out.println("has reached event");
             getEventInNode();
             traverseBackToNode();
             goBack = true;
             lifeTime--;
-            System.out.println("has reached event");
             return false;
         }
 
         if(!followAPathToEvent()){
+            System.out.println("move to random node");
             moveToRandomNode();
             lifeTime--;
-            System.out.println("follow path to event");
             return false;
         }
         if ((goBack && originNode.equals(currentNode )) || originNode.equals(event.getEventNode())){
-            System.out.println("WHATTT");
+           lifeTime = 0;
             return true;
         }
+        System.out.println("helel");
         return false;
     }
 
@@ -73,6 +77,7 @@ public class Request {
                 if (event.equals(this.event) && event.getNodeToEvent() != null){
                     path.push(event.getNodeToEvent());
                     currentNode = event.getNodeToEvent();
+                    System.out.println("Follow path to event");
                     return true;
                 }
             }
@@ -83,7 +88,10 @@ public class Request {
 
     private void traverseBackToNode(){
         if (!path.empty()) {
-            currentNode = path.pop();
+            path.pop();
+            if (!path.isEmpty()) {
+                currentNode = path.peek();
+            }
         }
     }
     private void getEventInNode(){
@@ -99,7 +107,7 @@ public class Request {
             currentNode = movableNeighbours.get(newNode);
         }
         else {
-            lifeTime = 0;
+            lifeTime = 0; //The request dies if it gets stuck
         }
 
     }

@@ -29,7 +29,8 @@ public class Simulation {
         if (!requests.isEmpty()) {
             for (Request request: requests) {
                 if (request.traverse()){
-                    System.out.println(request.getEvent().getEventId());
+                    System.out.println("RequestMessage from Node: " + request.getOrginNode().getPosition().toString() +
+                            "\n" + request.getEvent().toString());
                 }
             }
         }

@@ -35,8 +35,11 @@ public class Event {
     public Node getEventNode() {
         return eventNode;
     }
-    public void printEvent() {
 
+    @Override
+    public String toString() {
+        return "Event ID: " + eventId + "\ntimeStep: " + timeStep +
+                "\nEventNode position: " + eventNode.getPosition().toString();
     }
 
     public void setNodeToEvent(Node node){
