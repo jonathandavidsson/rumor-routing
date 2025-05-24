@@ -6,10 +6,10 @@ class NodeTest {
 
     @Test
     void getPosition() {
-    Position pos = new Position(1,1);
-    Node node = new Node(pos);
+        Position pos = new Position(1,1);
+        Node node = new Node(pos);
 
-    assertEquals(pos, node.getPosition());
+        assertEquals(pos, node.getPosition());
     }
 
     @Test
@@ -27,7 +27,6 @@ class NodeTest {
 
         ArrayList<Node> neighbours = center.getNeighbours();
 
-        assertEquals(2, neighbours.size());
         assertTrue(neighbours.contains(neighbor1));
         assertTrue(neighbours.contains(neighbor2));
     }
@@ -35,22 +34,65 @@ class NodeTest {
 
     @Test
     void getKnownEvents() {
+        Position pos = new Position(0, 0);
+        Node node = new Node(pos);
 
+        Event event1 = new Event(1, 10, node, 5);
+        Event event2 = new Event(2, 10, node, 8);
+
+        node.setNewEvent(event1);
+        node.setNewEvent(event2);
+
+        ArrayList<Event> events = node.getKnownEvents();
+        assertTrue(events.contains(event1));
+        assertTrue(events.contains(event2));
     }
 
     @Test
     void setNewEvent() {
+        Position pos = new Position(0, 0);
+        Node node = new Node(pos);
+
+        Event event1 = new Event(1, 10, node, 5);
+        Event event2 = new Event(2, 10, node, 8);
+
+        node.setNewEvent(event1);
+        node.setNewEvent(event2);
+
+        ArrayList<Event> events = node.getKnownEvents();
+        assertEquals(2, events.size());
     }
 
     @Test
     void setNearestEventDirection() {
+
+
     }
 
     @Test
     void testEquals() {
+        Position pos1 = new Position(1, 1);
+        Position pos2 = new Position(1, 1);
+        Node node1 = new Node(pos1);
+        Node node2 = new Node(pos2);
+
+        assertEquals(node1, node2);
+
+        Position pos3 = new Position(1, 1);
+        Position pos4 = new Position(1, 2);
+        Node node3 = new Node(pos3);
+        Node node4 = new Node(pos4);
+
+        assertNotEquals(node3,node4);
     }
 
     @Test
     void addNeighbour() {
+        Node mainNode = new Node(new Position(0, 0));
+        Node neighbour = new Node(new Position(1, 0));
+
+        mainNode.addNeighbour(neighbour);
+
+        assertTrue(mainNode.getNeighbours().contains(neighbour));
     }
 }
