@@ -61,6 +61,7 @@ public class Event {
                   this.timeStep,
                   this.eventNode,
                   this.shortestWayToEvent);
+        clone.setNodeToEvent(this.nodeToEvent);
         return clone;
     }
 
