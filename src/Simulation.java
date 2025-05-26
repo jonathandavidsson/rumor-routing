@@ -37,7 +37,7 @@ public class Simulation {
         }
     }
 
-    private void addEventToNode(Node node){
+    public void addEventToNode(Node node){
         Event event = new Event(timestep, timestep, node, 0);
         int coinflip = (int) (Math.random() * 2);
         //if (coinflip == 1){
@@ -66,6 +66,8 @@ public class Simulation {
     public ArrayList<Agent> getAgents(){
         return agents;
     }
+
+
 
     @Override
     public String toString() {

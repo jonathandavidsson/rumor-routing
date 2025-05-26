@@ -20,7 +20,7 @@ public class Main{
         Simulation sim = new Simulation(scanner, 2);
        // Map map = new Map(scanner);
         sim.setPercentChanceOfEvents(1);
-        sim.updateTime();
+        sim.addEventToNode(sim.getMap().getNodes().get(9));
         System.out.println("Agent position:" + sim.getAgents().get(0).getNode().getPosition().toString());
         System.out.print("\nNode0,0 neigbours:");
         for(Node node : sim.getMap().getNodes().get(0).getNeighbours() ) {
@@ -31,6 +31,7 @@ public class Main{
         sim.createRequest(sim.getMap().getNodes().get(0), sim.getMap().getEvents().get(0));
 
         do{
+            sim.updateTime();
             System.out.println("*************");
             System.out.println("Request position:" + sim.getRequests().get(0).getCurrentNode().getPosition().toString());
             System.out.println("Agent position:" + sim.getAgents().get(0).getNode().getPosition().toString());
@@ -39,7 +40,6 @@ public class Main{
                     System.out.println("EventID" + event.getEventId() +" - pathToEvent: " +  event.getNodeToEvent().getPosition().toString());
                 }
             }
-            sim.updateTime();
             System.out.println("*************");
         }while (!sim.getRequests().get(0).isDead());
     }
