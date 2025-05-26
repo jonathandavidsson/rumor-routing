@@ -25,6 +25,9 @@ public class Simulation {
         if (!agents.isEmpty()) {
             for (Agent agent : agents) {
                 agent.traverse();
+                if (agent.isDead()) {
+                    agents.remove(agent);
+                }
             }
         }
         if (!requests.isEmpty()) {
@@ -32,6 +35,9 @@ public class Simulation {
                 if (request.traverse()){
                     System.out.println("RequestMessage from Node: " + request.getOrginNode().getPosition().toString() +
                             "\n" + request.getEvent().toString());
+                }
+                if (request.isDead()){
+                //    requests.remove(request);
                 }
             }
         }
