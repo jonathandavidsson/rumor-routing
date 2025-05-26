@@ -25,6 +25,9 @@ public class Simulation {
         if (!agents.isEmpty()) {
             for (Agent agent : agents) {
                 agent.traverse();
+                if (agent.isDead()) {
+                    agents.remove(agent);
+                }
             }
         }
         if (!requests.isEmpty()) {
@@ -33,11 +36,14 @@ public class Simulation {
                     System.out.println("RequestMessage from Node: " + request.getOrginNode().getPosition().toString() +
                             "\n" + request.getEvent().toString());
                 }
+                if (request.isDead()){
+                //    requests.remove(request);
+                }
             }
         }
     }
 
-    private void addEventToNode(Node node){
+    public void addEventToNode(Node node){
         Event event = new Event(timestep, timestep, node, 0);
         int coinflip = (int) (Math.random() * 2);
         //if (coinflip == 1){
@@ -66,6 +72,8 @@ public class Simulation {
     public ArrayList<Agent> getAgents(){
         return agents;
     }
+
+
 
     @Override
     public String toString() {
