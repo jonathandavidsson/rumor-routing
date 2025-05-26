@@ -26,19 +26,22 @@ public class Main{
         for(Node node : sim.getMap().getNodes().get(0).getNeighbours() ) {
             System.out.println(node.getPosition().toString() + " ");
         }
+        Agent firstAgent = sim.getAgents().get(0);
         System.out.println("Event Position;" + sim.getMap().getEvents().get(0).getEventNode().getPosition().toString());
         System.out.println("********************");
         sim.createRequest(sim.getMap().getNodes().get(0), sim.getMap().getEvents().get(0));
+        Request request = sim.getRequests().get(0);
 
         do{
-            sim.updateTime();
+            request.traverse();
+            firstAgent.traverse();
             System.out.println("**************");
-            System.out.println("Request position:" + sim.getRequests().get(0).getCurrentNode().getPosition().toString());
-            System.out.println("        Agent position:" + sim.getAgents().get(0).getNode().getPosition().toString());
-            System.out.println("        Agent event"    + sim.getAgents().get(0).getEvents().get(0).getNodeToEvent().getPosition().toString());
-            for(Event event : sim.getRequests().get(0).getCurrentNode().getKnownEvents()) {
-                if (event.getNodeToEvent() != null && event.equals(sim.getRequests().get(0).getEvent())){
-                    System.out.println("EventID" + event.getEventId() +" - pathToEvent: " +  event.getNodeToEvent().getPosition().toString());
+            System.out.println("Request position:" + request.getCurrentNode().getPosition().toString());
+            System.out.println("        Agent position:" + firstAgent.getNode().getPosition().toString());
+            System.out.println("        Agent event"    + firstAgent.getEvents().get(0).getNodeToEvent().getPosition().toString());
+            for(Event event : request.getCurrentNode().getKnownEvents()) {
+                if (event.getNodeToEvent() != null && event.equals(request.getEvent())){
+                    System.out.println("found in" + request.getCurrentNode().getPosition().toString() + "EventID" + event.getEventId() +" - pathToEvent: " +  event.getNodeToEvent().getPosition().toString());
                 }
             }
             System.out.println("*************\n");

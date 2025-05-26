@@ -26,7 +26,7 @@ public class Simulation {
             for (Agent agent : agents) {
                 agent.traverse();
                 if (agent.isDead()) {
-                    agents.remove(agent);
+                 //   agents.remove(agent);
                 }
             }
         }

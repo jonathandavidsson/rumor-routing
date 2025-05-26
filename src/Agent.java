@@ -11,7 +11,7 @@ public class Agent {
     private Node currentNode;
     private Node prevNode;
     private ArrayList<Event> events;
-    private Set<Node> visitedNodes = new HashSet<>();
+    private Set<Node> visitedNodes;
     private int lifetime;
     private ArrayList<Node> neighbours;
     private ArrayList<Node> movable;
@@ -20,6 +20,7 @@ public class Agent {
         this.currentNode = currentNode;
         events = new ArrayList<>();
         ArrayList<Object> theInfo = new ArrayList<>();
+        visitedNodes = new HashSet<>();
         events.add(event);
         this.lifetime = 50;
     }
@@ -90,6 +91,10 @@ public class Agent {
 
     public Set<Node> getVisitedNodes(){
         return visitedNodes;
+    }
+
+    public boolean isDead(){
+        return lifetime == 0;
     }
 
     private ArrayList<Node> getMovableNeighbours(ArrayList<Node> neighbours){

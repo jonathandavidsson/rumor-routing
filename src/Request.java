@@ -5,7 +5,7 @@ public class Request {
 
     private Node originNode;
     private Event event;
-    private int lifeTime = 15;
+    private int lifeTime;
     private Stack<Node> path;
     private Node currentNode;
     private boolean goBack;
@@ -16,6 +16,7 @@ public class Request {
         path = new Stack<>();
         path.push(originNode);
         currentNode = originNode;
+        lifeTime = 15;
         goBack = false;
 
     }
