@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Simulation {
     private Map map;
-    private int timestep = 0;
+    private int timestep;
     private ArrayList<Agent> agents;
     private ArrayList<Request> requests;
     private double percentChanceOfEvents;
@@ -13,6 +13,7 @@ public class Simulation {
         agents = new ArrayList<>();
         requests = new ArrayList<>();
         percentChanceOfEvents = 0.002;
+        timestep = 0;
     }
 
     public void updateTime(){
@@ -39,10 +40,10 @@ public class Simulation {
     private void addEventToNode(Node node){
         Event event = new Event(timestep, timestep, node, 0);
         int coinflip = (int) (Math.random() * 2);
-        if (coinflip == 1){
+        //if (coinflip == 1){
             Agent agent = new Agent(node, event);
             agents.add(agent);
-        }
+        //}
         map.addEvent(event);
     }
     //public void createRequest(Event event){

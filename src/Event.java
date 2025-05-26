@@ -46,8 +46,13 @@ public class Event {
         this.nodeToEvent = node;
     }
 
-    public boolean equals(Event event) {
-        return eventId == event.eventId;
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Event)) {
+            return false;
+        }
+        Event event=(Event)obj;
+        return event.eventId == this.eventId;
     }
 
     public Event cloneEvent(){

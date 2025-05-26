@@ -29,10 +29,11 @@ public class Agent {
             return;
         }
         checkEventsInNode();
-        putEventsInNode();
+
         neighbours = currentNode.getNeighbours();
         movable = getMovableNeighbours(neighbours);
         visitedNodes.add(currentNode);
+
 
         if(!movable.isEmpty()){ //Flyttar på agenten så länge det finns en nod som den kan gå till (kan ha fastnat i ett hörn t.ex).
             prevNode = currentNode;
@@ -41,8 +42,8 @@ public class Agent {
         }else{
             lifetime = 0; //Om roboten inte kan röra sig sätter vi lifetime till 0 (agenten dör)
         }
+        putEventsInNode();
         updateDistance();
-
     }
     public ArrayList<Event> getEvents(){
         return events;

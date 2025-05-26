@@ -59,6 +59,7 @@ public class Request {
         }
         if ((goBack && originNode.equals(currentNode )) || originNode.equals(event.getEventNode())){
            lifeTime = 0;
+            System.out.println("shouldnt happen");
             return true;
         }
         System.out.println("helel");
