@@ -110,9 +110,9 @@ public class Agent {
                 || bestEventInNode.getShortestWayToEvent() == -1){
                     bestEventInNode.setShortestWayToEvent(agentEvent.getShortestWayToEvent());
                     bestEventInNode.setNodeToEvent(agentEvent.getNodeToEvent());
-                }else{
-                    eventsInNode.add(agentEvent.cloneEvent());
                 }
+            }else{
+                currentNode.setNewEvent(agentEvent.cloneEvent());
             }
         }
     }

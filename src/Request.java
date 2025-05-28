@@ -72,21 +72,29 @@ public class Request {
     }
 
     private boolean followAPathToEvent() {
-        ArrayList<Event> test = currentNode.getKnownEvents();
-        int index = test.indexOf(event);
-        if (!getCurrentNode().getKnownEvents().isEmpty())
+        ArrayList<Event> knownEvents = currentNode.getKnownEvents();
+        if (!knownEvents.isEmpty())
         {
-            for (Event event: getCurrentNode().getKnownEvents()) {
+            Event matchingEvent = null;
+            for (Event knownEvent: knownEvents) {
                 //if the node request is on knows a path to a event then this function follows it.
-                if (event.equals(this.event) && event.getNodeToEvent() != null){
-                    path.push(test.get(index).getNodeToEvent());
-                    currentNode = event.getNodeToEvent();
-                    System.out.println("Follow path to event");
-                    return true;
+                if (knownEvent.equals(this.event)){
+                    matchingEvent = knownEvent;
+                    break;
                 }
             }
-        }
 
+            if(matchingEvent != null && matchingEvent.getNodeToEvent() != null){
+                path.push(matchingEvent.getNodeToEvent());
+                currentNode = matchingEvent.getNodeToEvent();
+                System.out.println("Follow path to event");
+                System.out.println("found in(" + getCurrentNode().getPosition().toString() +
+                        ")EventID" + matchingEvent.getEventId() + " - pathToEvent: " +
+                        matchingEvent.getNodeToEvent().getPosition().toString());
+                lifeTime--;
+                return true;
+            }
+        }
         return false;
     }
 

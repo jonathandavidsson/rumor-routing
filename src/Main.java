@@ -20,7 +20,8 @@ public class Main{
         Simulation sim = new Simulation(scanner, 2);
        // Map map = new Map(scanner);
         sim.setPercentChanceOfEvents(1);
-        sim.addEventToNode(sim.getMap().getNodes().get(9));
+        //sim.addEventToNode(sim.getMap().getNodes().get(9));
+        sim.updateTime();
         System.out.println("Agent position:" + sim.getAgents().get(0).getNode().getPosition().toString());
         System.out.print("\nNode0,0 neigbours:");
         for(Node node : sim.getMap().getNodes().get(0).getNeighbours() ) {
