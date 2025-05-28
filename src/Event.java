@@ -1,8 +1,17 @@
+/**
+ * Class: Event
+ * Description: This class is used for the events in the map. Events are created at random nodes with a chance of 0.001%
+ * for every node. Event collaborates a lot with Agent and Request.
+ *
+ * Date: 28/05/25
+ * Authors: Jonathan Davidsson, Joel ..., Liam ..., Lukasz ...
+ */
+
 public class Event {
-    private final int eventId;
+    private int eventId;
     private int timeStep;
     private int shortestWayToEvent;
-    private final Node eventNode;
+    private Node eventNode;
     private Node nodeToEvent;
 
     public Event(int eventId, int timeStep, Node eventNode, int distance) {
@@ -44,10 +53,18 @@ public class Event {
         return nodeToEvent;
     }
 
+    /**
+     * Description: Returns the id of the event.
+     * @return Returns the events eventID.
+     */
     public int getEventId() {
         return eventId;
     }
 
+    /**
+     * Description: Returns the node the event was created at.
+     * @return Returns the event node.
+     */
     public Node getEventNode() {
         return eventNode;
     }
@@ -71,6 +88,10 @@ public class Event {
         return event.eventId == this.eventId;
     }
 
+    /**
+     * Description: Creates a clone of the event.
+     * @return Returns the created clone of the event.
+     */
     public Event cloneEvent(){
         Event clone = new Event(
                   this.eventId,
