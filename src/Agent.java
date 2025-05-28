@@ -6,6 +6,17 @@ import java.util.Set;
 
 import static java.lang.Math.random;
 
+/**
+ * Class: Agent
+ * Description: This class is an agent that traverses the map. An agent will spawn at an event node.
+ * The agent will gather the info from the event and later start traversing the map and delivering the info
+ * to every node that the agent walks on. If the agent walks on a node that contains info about an event that the
+ * agent does not know about the agent will pick up that information and continue spreading it to other nodes.
+ * The agent lives for a total of 50 timesteps.
+ *
+ * Date: 28/05/25
+ * Authors: Jonathan Davidsson, Joel ..., Liam ..., Lukasz ...
+ */
 public class Agent {
 
     private Node currentNode;
@@ -24,10 +35,18 @@ public class Agent {
         this.lifetime = 50;
     }
 
+    /**
+     * Description: Checks if the agent is dead/can't move any longer.
+     * @return returns a boolean, true if the agent is dead and false if it's not.
+     */
     public boolean isDead(){
         return this.lifetime == 0;
     }
 
+    /**
+     * Description: Moves the agent to a movable position, if the agent cannot move anymore the
+     * agent will die.
+     */
     public void traverse(){
         if(lifetime == 0){ //Om lifetime är noll, sluta gå
             return;
@@ -49,10 +68,19 @@ public class Agent {
         }
         putEventsInNode();
     }
+
+    /**
+     * Description: Returns the arraylist containing every event the agent holds.
+     * @return Returns the arraylist of events.
+     */
     public ArrayList<Event> getEvents(){
         return events;
     }
 
+    /**
+     * Description: Updates the distance and nodeToEvent with each step the agent takes.
+     *
+     */
     private void updateDistance() {
         for(int i = 0; i < events.size(); i++){
             Event e = events.get(i);
@@ -73,6 +101,10 @@ public class Agent {
         }
     }
 
+    /**
+     * Description: Checks what events are in the current node, if the node contains events that the
+     * agent does not have, the agent will pick up the event info for that event from the node.
+     */
     private void checkEventsInNode() {
         ArrayList<Event> eventsInNode = currentNode.getKnownEvents();
         for(Event nodeEvent: eventsInNode) {
@@ -93,6 +125,11 @@ public class Agent {
             }
         }
     }
+
+    /**
+     * Description: The agent delivers all event information to the node that the agent possesses. If the node
+     * already have that information it will skip that particular event.
+     */
     private void putEventsInNode(){
         ArrayList<Event> eventsInNode = currentNode.getKnownEvents();
         for(Event agentEvent : events){
@@ -117,14 +154,27 @@ public class Agent {
         }
     }
 
+    /**
+     * Description: Returns the current node that the agent is on.
+     * @return Returns the current node.
+     */
     public Node getNode(){
         return currentNode;
     }
 
+    /**
+     * Description: Returns a set containing the nodes that the agent has already been on.
+     * @return Returns the nodes the agent has visited.
+     */
     public Set<Node> getVisitedNodes(){
         return visitedNodes;
     }
 
+    /**
+     * Description: Returns all movable positions that the agent can walk to.
+     * @param neighbours all the current nodes neighbours.
+     * @return Returns an arraylist with all movable nodes.
+     */
     private ArrayList<Node> getMovableNeighbours(ArrayList<Node> neighbours){
         ArrayList<Node> movableNodes = new ArrayList<>();
         for(int i = 0; i < neighbours.size(); i++){

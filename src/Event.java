@@ -12,18 +12,34 @@ public class Event {
         shortestWayToEvent = distance;
     }
 
+    /**
+     * Description: Returns the number of steps for the shortest way to the event
+     * @return Returns the shortestWayToEvent integer.
+     */
     public int getShortestWayToEvent() {
         return shortestWayToEvent;
     }
 
+    /**
+     * Description: Sets the shortestWayToEvent to a new given value.
+     * @param shortestWayToEvent The new value of shortestWayToEvent.
+     */
     public void setShortestWayToEvent(int shortestWayToEvent) {
         this.shortestWayToEvent = shortestWayToEvent;
     }
 
+    /**
+     * Description: Returns the timeStep that the event was created at.
+     * @return Returns the event's timeStep.
+     */
     public int getTimeStep() {
         return timeStep;
     }
 
+    /**
+     * Description: Returns the direction towards the event (for event clones).
+     * @return Returns the nodeToEvent.
+     */
     public Node getNodeToEvent() {
         return nodeToEvent;
     }
