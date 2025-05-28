@@ -1,8 +1,9 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Simulation {
-    private Map map;
+    private final Map map;
     private int timestep;
     private ArrayList<Agent> agents;
     private ArrayList<Request> requests;
@@ -13,7 +14,7 @@ public class Simulation {
         map = new Map(s, nodeReach); //TODO
         agents = new ArrayList<>();
         requests = new ArrayList<>();
-        percentChanceOfEvents = 0.002;
+        percentChanceOfEvents = 0.0001;
         timestep = 0;
     }
 
@@ -24,21 +25,24 @@ public class Simulation {
             addEventToNode(map.getRandomNode());
         }
         if (!agents.isEmpty()) {
-            for (Agent agent : agents) {
+            Iterator<Agent> agentIterator = agents.iterator();
+            while (agentIterator.hasNext()){
+                Agent agent = agentIterator.next();
                 agent.traverse();
-                if (agent.isDead()) {
-                 //   agents.remove(agent);
+                if (agent.isDead()){
+                    agentIterator.remove();
                 }
             }
         }
         if (!requests.isEmpty()) {
-            for (Request request: requests) {
-                if (request.traverse()){
-                    System.out.println("RequestMessage from Node: " + request.getOrginNode().getPosition().toString() +
-                            "\n" + request.getEvent().toString());
+            Iterator<Request> iterator = requests.iterator();
+            while (iterator.hasNext()) {
+                Request request = iterator.next();
+                if (request.traverse()) {
+                    request.printRequestEvent();
                 }
-                if (request.isDead()){
-                //    requests.remove(request);
+                if (request.isDead()) {
+                    iterator.remove();
                 }
             }
         }
@@ -47,15 +51,13 @@ public class Simulation {
     public void addEventToNode(Node node){
         Event event = new Event(timestep, timestep, node, 0);
         int coinflip = (int) (Math.random() * 2);
-        //if (coinflip == 1){
+        if (coinflip == 1) {
             Agent agent = new Agent(node, event);
             agents.add(agent);
-        //}
+        }
         map.addEvent(event);
     }
-    //public void createRequest(Event event){
-    //    requests.add(new Request());
-    //}
+
 
     public void setPercentChanceOfEvents(double percentChanceOfEvents) {
         this.percentChanceOfEvents = percentChanceOfEvents;

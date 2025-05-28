@@ -28,11 +28,11 @@ class SimulationTest {
            sim.updateTime();
        }
 
-       Position p1 = sim.getAgents().getFirst().getNode().getPosition();
+       Position p1 = sim.getAgents().get(0).getNode().getPosition();
 
        sim.updateTime();
 
-       Position p2 = sim.getAgents().getFirst().getNode().getPosition();
+       Position p2 = sim.getAgents().get(0).getNode().getPosition();
 
        assertNotEquals(p1, p2);
 
@@ -93,7 +93,7 @@ class SimulationTest {
             sim.updateTime();
         }
 
-       sim.createRequest(sim.getMap().getNodes().getFirst(), sim.getMap().getEvents().getFirst());
+       sim.createRequest(sim.getMap().getNodes().get(0), sim.getMap().getEvents().get(0));
 
         int postSize = sim.getRequests().size();
 

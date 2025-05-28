@@ -3,8 +3,8 @@ import java.util.Stack;
 
 public class Request {
 
-    private Node originNode;
-    private Event event;
+    private final Node originNode;
+    private final Event event;
     private int lifeTime;
     private Stack<Node> path;
     private Node currentNode;
@@ -16,7 +16,7 @@ public class Request {
         path = new Stack<>();
         path.push(originNode);
         currentNode = originNode;
-        lifeTime = 15;
+        lifeTime = 45;
         goBack = false;
 
     }
@@ -33,7 +33,6 @@ public class Request {
         }
 
         if (goBack){
-            System.out.println("go back");
             if (!hasReachedOriginNode()){
                 traverseBackToNode();
             } else {
@@ -44,7 +43,6 @@ public class Request {
         }
 
         if (hasReachedEvent()){
-            System.out.println("has reached event");
             getEventInNode();
             traverseBackToNode();
             goBack = true;
@@ -53,20 +51,18 @@ public class Request {
         }
 
         if(!followAPathToEvent()){
-            System.out.println("move to random node");
             moveToRandomNode();
             lifeTime--;
             return false;
         }
-        if ((goBack && originNode.equals(currentNode )) || originNode.equals(event.getEventNode())){
-           lifeTime = 0;
-            System.out.println("shouldnt happen");
-            return true;
-        }
-        System.out.println("helel");
+
         return false;
     }
 
+    /**
+     * Returns true
+     * @return
+     */
     private boolean hasReachedOriginNode(){
         return currentNode.equals(originNode);
     }
@@ -87,10 +83,10 @@ public class Request {
             if(matchingEvent != null && matchingEvent.getNodeToEvent() != null){
                 path.push(matchingEvent.getNodeToEvent());
                 currentNode = matchingEvent.getNodeToEvent();
-                System.out.println("Follow path to event");
-                System.out.println("found in(" + getCurrentNode().getPosition().toString() +
-                        ")EventID" + matchingEvent.getEventId() + " - pathToEvent: " +
-                        matchingEvent.getNodeToEvent().getPosition().toString());
+//                System.out.println("Follow path to event");
+//                System.out.println("found in(" + getCurrentNode().getPosition().toString() +
+//                        ")EventID" + matchingEvent.getEventId() + " - pathToEvent: " +
+//                        matchingEvent.getNodeToEvent().getPosition().toString());
                 lifeTime--;
                 return true;
             }
@@ -160,6 +156,12 @@ public class Request {
     }
     public boolean isDead(){
         return lifeTime <= 0;
+    }
+
+    public void printRequestEvent(){
+        System.out.println("RequestMessage from Node: " + getOrginNode().getPosition().toString() +
+                " found:" +
+                "\n" + getEvent().toString());
     }
 
 }
