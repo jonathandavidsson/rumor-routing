@@ -59,6 +59,10 @@ public class Request {
         return false;
     }
 
+    /**
+     * Returns true
+     * @return
+     */
     private boolean hasReachedOriginNode(){
         return currentNode.equals(originNode);
     }
@@ -152,6 +156,12 @@ public class Request {
     }
     public boolean isDead(){
         return lifeTime <= 0;
+    }
+
+    public void printRequestEvent(){
+        System.out.println("RequestMessage from Node: " + getOrginNode().getPosition().toString() +
+                " found:" +
+                "\n" + getEvent().toString());
     }
 
 }

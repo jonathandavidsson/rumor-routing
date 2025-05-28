@@ -39,9 +39,7 @@ public class Simulation {
             while (iterator.hasNext()) {
                 Request request = iterator.next();
                 if (request.traverse()) {
-                    System.out.println("RequestMessage from Node: " + request.getOrginNode().getPosition().toString() +
-                            "found:" +
-                            "\n" + request.getEvent().toString());
+                    request.printRequestEvent();
                 }
                 if (request.isDead()) {
                     iterator.remove();
