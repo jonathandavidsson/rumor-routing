@@ -14,7 +14,7 @@ public class Map {
         events = new ArrayList<>();
     }
 
-    /*
+    /**
      * reads the scanner and converts the file to positions
      * throws a RuntimeException
      * @param s A scanner
@@ -40,7 +40,7 @@ public class Map {
         return positions;
     }
 
-    /*
+    /**
      * Calculates which positions are in range for a node
      * and creates nodes in all positions.
      * @param positions A list with every position.
@@ -65,7 +65,7 @@ public class Map {
         }
     }
 
-    /*
+    /**
      *chooses random nodes that will send out a request.
      */
     private void add4RequestNodes(){
