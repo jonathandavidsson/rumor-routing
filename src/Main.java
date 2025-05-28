@@ -1,8 +1,33 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main{
+    public static void main(String[] args) throws FileNotFoundException {
 
-    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(new File(args[0]));
+        Simulation sim = new Simulation(scanner, 15);
+
+        for (int i = 1; i <= 10000; i++) {
+            sim.updateTime();
+            if (i%400 == 0 && !sim.getEvents().isEmpty()){
+                for (int j = 0; j < 4; j++) {
+                    sim.createRequest(sim.getMap().getRequestNodes().get(j),
+                            sim.getEvents().get((int) (Math.random() * sim.getEvents().size())));
+                }
+
+            }
+
+        }
+
+    }
+
+
+
+
+
+    public void test1(){
 
         Scanner scanner = new Scanner(
                 "10\n" +
@@ -18,10 +43,9 @@ public class Main{
                         "9,9");
 
         Simulation sim = new Simulation(scanner, 2);
-       // Map map = new Map(scanner);
+        // Map map = new Map(scanner);
         sim.setPercentChanceOfEvents(1);
-        //sim.addEventToNode(sim.getMap().getNodes().get(9));
-        sim.updateTime();
+        sim.addEventToNode(sim.getMap().getNodes().get(9));
         System.out.println("Agent position:" + sim.getAgents().get(0).getNode().getPosition().toString());
         System.out.print("\nNode0,0 neigbours:");
         for(Node node : sim.getMap().getNodes().get(0).getNeighbours() ) {
@@ -49,3 +73,4 @@ public class Main{
         System.out.println("Amount of events during simulation: " + sim.getEvents().size());
     }
 }
+

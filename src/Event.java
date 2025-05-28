@@ -1,8 +1,8 @@
 public class Event {
-    private int eventId;
+    private final int eventId;
     private int timeStep;
     private int shortestWayToEvent;
-    private Node eventNode;
+    private final Node eventNode;
     private Node nodeToEvent;
 
     public Event(int eventId, int timeStep, Node eventNode, int distance) {
