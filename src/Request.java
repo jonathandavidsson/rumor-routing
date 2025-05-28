@@ -7,7 +7,7 @@ import java.util.Stack;
  * the origin of the Request.
  *
  * Date: 28/05/25
- * @author: Jonathan Davidsson, Joel Lindgren, Liam ..., Lukasz ...
+ * @author: Jonathan Davidsson, Joel Lindgren - dv24jon, Liam ..., Lukasz ...
  */
 public class Request {
 
