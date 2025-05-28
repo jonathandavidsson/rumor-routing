@@ -27,7 +27,7 @@ class RequestTest {
         sim.createRequest(sim.getMap().getNodes().get(0), sim.getMap().getEvents().get(0));
 
         Node n1 = sim.getRequests().get(0).getCurrentNode();
-        sim.getRequests().getFirst().traverse();
+        sim.getRequests().get(0).traverse();
         Node n2 = sim.getRequests().get(0).getCurrentNode();
 
         assertNotEquals(n1, n2);
