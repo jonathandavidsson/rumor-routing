@@ -56,13 +56,6 @@ public class Node {
         knownEvents.add(event);
     }
 
-    public void setNearestEventDirection(Event event, Position pos){
-
-    }
-
-    //public void takeRequest(Request req){
-
-    //}
 
     @Override
     public boolean equals(Object obj) {
@@ -78,14 +71,6 @@ public class Node {
         return pos.hashCode();
     }
 
-//    public void takeAgentInfo(Hashtable<Event, ArrayList<Object>> info){
-//        ArrayList<Event> keys = new ArrayList<>(info.keySet());
-//        for(int i = 0; i < info.size(); i++){
-//            Event e = keys.get(i);
-//            ArrayList<Object> agentInfo = info.get(e);
-//            knownEvents.put(e, agentInfo);
-//        }
-//    }
 
     /**
      * Description: Adds a neighbour to the nodes arraylist of neighbours.
