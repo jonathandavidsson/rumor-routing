@@ -44,8 +44,7 @@ public class Simulation {
             Iterator<Agent> agentIterator = agents.iterator();
             while (agentIterator.hasNext()){
                 Agent agent = agentIterator.next();
-                agent.traverse();
-                if (agent.isDead()){
+                if (!agent.traverse() || agent.isDead()){
                     agentIterator.remove();
                 }
             }
@@ -142,7 +141,7 @@ public class Simulation {
         } else {
             for (Request request : requests){
                 builder.append("Request:").append(i).append(" position:").
-                        append(request.getCurrentNode().getPosition().toString()).append("   ");
+                        append(request.getNode().getPosition().toString()).append("   ");
             }
 
         }

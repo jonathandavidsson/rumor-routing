@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Class: Node
@@ -11,7 +9,7 @@ import java.util.Set;
  * Authors: Jonathan Davidsson, Joel ..., Liam ..., Lukasz ...
  */
 public class Node {
-
+    private Queue<Messenger> messengers;
     private ArrayList<Node> neighbours;
     private Position pos;
     private ArrayList<Event> knownEvents;
@@ -22,6 +20,7 @@ public class Node {
         this.pos = pos;
         neighbours = new ArrayList<>();
         knownEvents = new ArrayList<>();
+        messengers = new LinkedList<>();
     }
 
     /**
@@ -79,4 +78,21 @@ public class Node {
     public void addNeighbour(Node node){
         neighbours.add(node);
     }
+
+    public void enqueue(Messenger messenger){
+        messengers.offer(messenger);
+    }
+
+    public Queue<Messenger> getMessengersInQueue(){
+        return messengers;
+    }
+
+    public boolean dequeue(Messenger messenger){
+        if(!messengers.isEmpty() && messengers.peek().equals(messenger)){
+            messengers.poll();
+            return true;
+        }
+        return false;
+    }
+
 }

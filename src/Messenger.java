@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * An interface used by Agent and Request.
  */
@@ -6,14 +9,8 @@ public interface Messenger {
     /**
      * traverses in the map
      */
-    void traverse();
+    boolean traverse();
 
-
-    /**
-     * Gets the messengers Event
-     * @return Event
-     */
-    Event getEvent();
 
     /**
      * Gets the messengers Node

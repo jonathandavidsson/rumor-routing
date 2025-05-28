@@ -17,7 +17,7 @@ import static java.lang.Math.random;
  * Date: 28/05/25
  * Authors: Jonathan Davidsson, Joel ..., Liam ..., Lukasz ...
  */
-public class Agent {
+public class Agent implements Messenger{
 
     private Node currentNode;
     private Node prevNode;
@@ -33,6 +33,7 @@ public class Agent {
         ArrayList<Object> theInfo = new ArrayList<>();
         events.add(event.cloneEvent());
         this.lifetime = 50;
+        currentNode.enqueue(this);
     }
 
     /**
@@ -47,11 +48,15 @@ public class Agent {
      * Description: Moves the agent to a movable position, if the agent cannot move anymore the
      * agent will die.
      */
-    public void traverse(){
-        if(lifetime == 0){ //Om lifetime är noll, sluta gå
-            return;
+    public boolean traverse(){
+        if(lifetime == 0){
+            return false;
+        }
+        if(!currentNode.dequeue(this)){
+            return false;
         }
         checkEventsInNode();
+        putEventsInNode();
 
         neighbours = currentNode.getNeighbours();
         movable = getMovableNeighbours(neighbours);
@@ -60,13 +65,16 @@ public class Agent {
 
         if(!movable.isEmpty()){ //Flyttar på agenten så länge det finns en nod som den kan gå till (kan ha fastnat i ett hörn t.ex).
             prevNode = currentNode;
-            currentNode = movable.get((int) (random() * movable.size()));
+            Node nextNode = movable.get((int) (random() * movable.size()));
+            nextNode.enqueue(this);
+            currentNode = nextNode;
             lifetime = lifetime - 1;
             updateDistance();
+            return true;
         }else{
             lifetime = 0; //Om roboten inte kan röra sig sätter vi lifetime till 0 (agenten dör)
+            return false;
         }
-        putEventsInNode();
     }
 
     /**

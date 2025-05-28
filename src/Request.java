@@ -9,7 +9,7 @@ import java.util.Stack;
  * Date: 28/05/25
  * @author: Jonathan Davidsson, Joel Lindgren - dv24jon, Liam ..., Lukasz ...
  */
-public class Request {
+public class Request implements Messenger {
 
     private final Node originNode;
     private final Event event;
@@ -26,7 +26,7 @@ public class Request {
         currentNode = originNode;
         lifeTime = 45;
         goBack = false;
-
+        currentNode.enqueue(this);
     }
 
     /**
@@ -44,14 +44,19 @@ public class Request {
             throw new IsDeadException();
         }
 
+        if(!currentNode.dequeue(this)){
+            return false;
+        }
+
         if (goBack){
             if (!hasReachedOriginNode()){
                 traverseBackToNode();
+                currentNode.enqueue(this);
+                return false;
             } else {
                 lifeTime = 0;
                 return true;
             }
-            return false;
         }
 
         if (hasReachedEvent()){
@@ -59,6 +64,8 @@ public class Request {
             traverseBackToNode();
             goBack = true;
             lifeTime--;
+            currentNode.enqueue(this);
+
             return false;
         }
 
@@ -67,7 +74,7 @@ public class Request {
             lifeTime--;
             return false;
         }
-
+        currentNode.enqueue(this);
         return false;
     }
 
@@ -135,7 +142,7 @@ public class Request {
      * If it cant, the request dies.
      */
     private void moveToRandomNode(){
-        ArrayList<Node> movableNeighbours = getMovableNeighbours(getCurrentNode().getNeighbours());
+        ArrayList<Node> movableNeighbours = getMovableNeighbours(getNode().getNeighbours());
 
         if (!movableNeighbours.isEmpty()){
             int newNode = (int)(movableNeighbours.size() * Math.random());
@@ -143,7 +150,7 @@ public class Request {
             currentNode = movableNeighbours.get(newNode);
         }
         else {
-            ArrayList<Node> neighbours = getCurrentNode().getNeighbours();
+            ArrayList<Node> neighbours = getNode().getNeighbours();
 
             if (!neighbours.isEmpty()){
                 int newNode = (int)(neighbours.size() * Math.random());
@@ -185,7 +192,7 @@ public class Request {
             return true;
         }
 
-        for (Event event: getCurrentNode().getKnownEvents()) {
+        for (Event event: getNode().getKnownEvents()) {
             if(event.equals(this.event) && event.getShortestWayToEvent() == 0){
                 return true;
             }
@@ -210,7 +217,7 @@ public class Request {
     /**
      * @return The node the request is on.
      */
-    public Node getCurrentNode() {
+    public Node getNode() {
         return currentNode;
     }
 
