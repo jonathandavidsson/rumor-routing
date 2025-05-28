@@ -72,12 +72,14 @@ public class Request {
     }
 
     private boolean followAPathToEvent() {
+        ArrayList<Event> test = currentNode.getKnownEvents();
+        int index = test.indexOf(event);
         if (!getCurrentNode().getKnownEvents().isEmpty())
         {
             for (Event event: getCurrentNode().getKnownEvents()) {
                 //if the node request is on knows a path to a event then this function follows it.
                 if (event.equals(this.event) && event.getNodeToEvent() != null){
-                    path.push(event.getNodeToEvent());
+                    path.push(test.get(index).getNodeToEvent());
                     currentNode = event.getNodeToEvent();
                     System.out.println("Follow path to event");
                     return true;

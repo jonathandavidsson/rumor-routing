@@ -44,10 +44,6 @@ class AgentTest {
         int eventsAfter = node.getKnownEvents().size();
         assertNotEquals(eventsBefore, eventsAfter, "The events should have been updated!");
     }
-    @org.junit.jupiter.api.Test
-    void traverseAddEventsInAgent(){
-
-    }
 
     @org.junit.jupiter.api.Test
     void getNode() {

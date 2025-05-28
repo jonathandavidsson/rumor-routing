@@ -33,8 +33,7 @@ public class Main{
         Request request = sim.getRequests().get(0);
 
         do{
-            request.traverse();
-            firstAgent.traverse();
+            sim.updateTime();
             System.out.println("**************");
             System.out.println("Request position:" + request.getCurrentNode().getPosition().toString());
             System.out.println("        Agent position:" + firstAgent.getNode().getPosition().toString());
@@ -46,5 +45,6 @@ public class Main{
             }
             System.out.println("*************\n");
         }while (!sim.getRequests().get(0).isDead());
+        System.out.println("Amount of events during simulation: " + sim.getEvents().size());
     }
 }

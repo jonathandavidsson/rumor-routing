@@ -7,6 +7,7 @@ public class Simulation {
     private ArrayList<Agent> agents;
     private ArrayList<Request> requests;
     private double percentChanceOfEvents;
+    private ArrayList<Event> events;
 
     public Simulation(Scanner s, int nodeReach){
         map = new Map(s, nodeReach); //TODO
@@ -98,5 +99,9 @@ public class Simulation {
 
         }
         return builder.toString();
+    }
+    public ArrayList<Event> getEvents(){
+        this.events = map.getEvents();
+        return events;
     }
 }
