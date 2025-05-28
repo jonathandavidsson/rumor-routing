@@ -20,6 +20,7 @@ public class Main{
             }
 
         }
+        System.out.println("Amount of events created while running: " + sim.getEvents().size());
 
     }
 
@@ -60,12 +61,12 @@ public class Main{
         do{
             sim.updateTime();
             System.out.println("**************");
-            System.out.println("Request position:" + request.getCurrentNode().getPosition().toString());
+            System.out.println("Request position:" + request.getNode().getPosition().toString());
             System.out.println("        Agent position:" + firstAgent.getNode().getPosition().toString());
             System.out.println("        Agent event"    + firstAgent.getEvents().get(0).getNodeToEvent().getPosition().toString());
-            for(Event event : request.getCurrentNode().getKnownEvents()) {
+            for(Event event : request.getNode().getKnownEvents()) {
                 if (event.getNodeToEvent() != null && event.equals(request.getEvent())){
-                    System.out.println("found in" + request.getCurrentNode().getPosition().toString() + "EventID" + event.getEventId() +" - pathToEvent: " +  event.getNodeToEvent().getPosition().toString());
+                    System.out.println("found in" + request.getNode().getPosition().toString() + "EventID" + event.getEventId() +" - pathToEvent: " +  event.getNodeToEvent().getPosition().toString());
                 }
             }
             System.out.println("*************\n");
