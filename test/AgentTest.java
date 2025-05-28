@@ -38,11 +38,13 @@ class AgentTest {
     }
     @org.junit.jupiter.api.Test
     void traverseAddEventsInNode(){
-        Node node = agent.getNode();
+        ArrayList<Node> movable = agent.getMovableNeighbours(agent.getNode().getNeighbours());
+        Node node = movable.get(0);
         int eventsBefore = node.getKnownEvents().size();
         agent.traverse();
-        int eventsAfter = node.getKnownEvents().size();
-        assertNotEquals(eventsBefore, eventsAfter, "The events should have been updated!");
+        int eventsAfter = agent.getNode().getKnownEvents().size();
+        assertTrue(eventsAfter > eventsBefore, "Events after should be bigger!");
+
     }
 
     @org.junit.jupiter.api.Test

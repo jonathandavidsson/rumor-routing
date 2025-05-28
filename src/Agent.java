@@ -175,7 +175,7 @@ public class Agent {
      * @param neighbours all the current nodes neighbours.
      * @return Returns an arraylist with all movable nodes.
      */
-    private ArrayList<Node> getMovableNeighbours(ArrayList<Node> neighbours){
+    public ArrayList<Node> getMovableNeighbours(ArrayList<Node> neighbours){
         ArrayList<Node> movableNodes = new ArrayList<>();
         for(int i = 0; i < neighbours.size(); i++){
             if(!visitedNodes.contains(neighbours.get(i))){
