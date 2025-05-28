@@ -11,6 +11,7 @@ class RequestTest  {
 
     @BeforeEach
     Simulation sim;
+
     void setup()throws IOException {
         Scanner scanner = new Scanner(new File("layout.txt"));
         Simulation sim = new Simulation(scanner, 2);
