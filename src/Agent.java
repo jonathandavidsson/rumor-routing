@@ -20,8 +20,12 @@ public class Agent {
         this.currentNode = currentNode;
         events = new ArrayList<>();
         ArrayList<Object> theInfo = new ArrayList<>();
-        events.add(event);
+        events.add(event.cloneEvent());
         this.lifetime = 50;
+    }
+
+    public boolean isDead(){
+        return this.lifetime == 0;
     }
 
     public void traverse(){
@@ -39,10 +43,10 @@ public class Agent {
             prevNode = currentNode;
             currentNode = movable.get((int) (random() * movable.size()));
             lifetime = lifetime - 1;
+            updateDistance();
         }else{
             lifetime = 0; //Om roboten inte kan röra sig sätter vi lifetime till 0 (agenten dör)
         }
-        updateDistance();
         putEventsInNode();
     }
     public ArrayList<Event> getEvents(){
@@ -56,11 +60,13 @@ public class Agent {
                 e.setShortestWayToEvent(0);
                 e.setNodeToEvent(null);
             } else if (prevNode != null) {
-                int oldDistance = e.getShortestWayToEvent();
-                int updatedDistance = oldDistance + 1;
+                int currentDistance = e.getShortestWayToEvent();
 
-                if (e.getNodeToEvent() == null || updatedDistance < oldDistance) {
-                    e.setShortestWayToEvent(updatedDistance);
+                if (prevNode.equals(e.getEventNode())) {
+                    e.setShortestWayToEvent(1);
+                    e.setNodeToEvent(prevNode);
+                } else if (currentDistance >= 0) {
+                    e.setShortestWayToEvent(currentDistance + 1);
                     e.setNodeToEvent(prevNode);
                 }
             }
@@ -69,27 +75,44 @@ public class Agent {
 
     private void checkEventsInNode() {
         ArrayList<Event> eventsInNode = currentNode.getKnownEvents();
-        for(int i = 0; i < eventsInNode.size(); i++){
-            Event e = eventsInNode.get(i);
-            if(!events.contains(e)){
-               events.add(e);
+        for(Event nodeEvent: eventsInNode) {
+            boolean hasEvent = false;
+            for (Event agentEvent : events) {
+                if (agentEvent.equals(nodeEvent)) {
+                    if (nodeEvent.getShortestWayToEvent() < agentEvent.getShortestWayToEvent()
+                            || agentEvent.getShortestWayToEvent() == -1) {
+                        agentEvent.setShortestWayToEvent(nodeEvent.getShortestWayToEvent());
+                        agentEvent.setNodeToEvent(nodeEvent.getNodeToEvent());
+                    }
+                    hasEvent = true;
+                    break;
+                }
+            }
+            if(!hasEvent){
+                events.add(nodeEvent.cloneEvent());
             }
         }
     }
     private void putEventsInNode(){
         ArrayList<Event> eventsInNode = currentNode.getKnownEvents();
-        for(int i = 0; i < events.size(); i++){
-            Event agentEvent = events.get(i);
+        for(Event agentEvent : events){
             boolean alreadyInNode = false;
-            for(int j = 0; j < eventsInNode.size(); j++){
-                Event nodeEvent = eventsInNode.get(j);
-                if(agentEvent.equals(nodeEvent)){
+            Event bestEventInNode = null;
+            for(Event nodeEvent : eventsInNode){
+                if(nodeEvent.equals(agentEvent)){
+                    bestEventInNode = nodeEvent;
                     alreadyInNode = true;
                     break;
                 }
             }
-            if(!alreadyInNode){
-                eventsInNode.add(agentEvent.cloneEvent());
+            if(alreadyInNode){
+                if(agentEvent.getShortestWayToEvent() < bestEventInNode.getShortestWayToEvent()
+                || bestEventInNode.getShortestWayToEvent() == -1){
+                    bestEventInNode.setShortestWayToEvent(agentEvent.getShortestWayToEvent());
+                    bestEventInNode.setNodeToEvent(agentEvent.getNodeToEvent());
+                }else{
+                    eventsInNode.add(agentEvent.cloneEvent());
+                }
             }
         }
     }
