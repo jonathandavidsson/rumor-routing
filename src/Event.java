@@ -69,16 +69,28 @@ public class Event {
         return eventNode;
     }
 
+    /**
+     * @return a string with data about the event.
+     */
     @Override
     public String toString() {
         return "Event ID: " + eventId + "\ntimeStep: " + timeStep +
                 "\nEventNode position: " + eventNode.getPosition().toString();
     }
 
+    /**
+     * Sets a new node for the event to be in.
+     * @param node the node the event will be in.
+     */
     public void setNodeToEvent(Node node){
         this.nodeToEvent = node;
     }
 
+    /**
+     * Implements an equals function
+     * @param obj a object
+     * @return true if the events are the same, otherwise false.
+     */
     @Override
     public boolean equals(Object obj) {
         if(!(obj instanceof Event)) {
