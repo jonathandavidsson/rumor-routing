@@ -1,5 +1,14 @@
 import java.util.*;
 
+/**
+ * Class: Map
+ * Description: This class is the base of the project. It is the map where everything transpires.
+ * It is the map of all the nodes in the project. The map gets createad and after that it will only
+ * add the info of events, request and such that are created within the map.
+ *
+ * Date: 28/05/25
+ * Authors: Jonathan Davidsson, Joel ..., Liam ..., Lukasz ...
+ */
 public class Map {
     private ArrayList<Node> theInfo;
     private ArrayList<Event> events;
@@ -75,14 +84,26 @@ public class Map {
         }
     }
 
+    /**
+     * Description: Returns a random node from the map.
+     * @return Returns a random node.
+     */
     public Node getRandomNode() {
         return theInfo.get((int) (Math.random() * theInfo.size()));
     }
 
+    /**
+     * Desription Returns every node in the map.
+     * @return Returns an arraylist containing every node in the map.
+     */
     public ArrayList<Node> getNodes() {
         return theInfo;
     }
 
+    /**
+     * Description: Adds an event to the correct node when created.
+     * @param event The event to be added.
+     */
     public void addEvent(Event event) {
         events.add(event);
         for (Node node: theInfo) {
@@ -93,14 +114,26 @@ public class Map {
         }
     }
 
+    /**
+     * Description: Returns all the events in the map.
+     * @return Returns an arraylist containing every event that is currently in the map.
+     */
     public ArrayList<Event> getEvents() {
         return events;
     }
 
+    /**
+     * Description: Returns the nodes that has created requests.
+     * @return Returns an arraylist of all nodes that has created a request.
+     */
     public ArrayList<Node> getRequestNodes() {
         return requestNodes;
     }
 
+    /**
+     * Description: Sets the node reach
+     * @param reach The value of reach to be set.
+     */
     public void setNodeReach(int reach){
         nodeReach = reach;
     }

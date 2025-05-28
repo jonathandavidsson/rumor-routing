@@ -58,4 +58,10 @@ class AgentTest {
         Set<Node> visitedNodes = agent.getVisitedNodes();
         assertNotNull(visitedNodes, "visitedNodes set should have been returned!");
     }
+
+    @org.junit.jupiter.api.Test
+    void getMovableNeighbours(){
+        ArrayList<Node> neighbours = agent.getMovableNeighbours(agent.getNode().getNeighbours());
+        assertNotNull(neighbours, "movableNeighbours arraylist should have been returned.");
+    }
 }
