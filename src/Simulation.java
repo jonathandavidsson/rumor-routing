@@ -35,8 +35,10 @@ public class Simulation {
     public void updateTime(){
         timestep++;
 
-        if (Math.random() <= percentChanceOfEvents){
-            addEventToNode(map.getRandomNode());
+        for (Node node: map.getNodes()) {
+            if (Math.random() <= percentChanceOfEvents) {
+                addEventToNode(node);
+            }
         }
         if (!agents.isEmpty()) {
             Iterator<Agent> agentIterator = agents.iterator();

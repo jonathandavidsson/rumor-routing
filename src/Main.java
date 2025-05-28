@@ -27,7 +27,7 @@ public class Main{
 
 
 
-    public void test1(){
+    public void testForAgentAndRequestTogether(){
 
         Scanner scanner = new Scanner(
                 "10\n" +
