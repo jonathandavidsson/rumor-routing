@@ -25,9 +25,9 @@ public class Simulation {
         if (!agents.isEmpty()) {
             for (Agent agent : agents) {
                 agent.traverse();
-                if (agent.isDead()) {
+            //    if (agent.isDead()) {
                  //   agents.remove(agent);
-                }
+             //   }
             }
         }
         if (!requests.isEmpty()) {

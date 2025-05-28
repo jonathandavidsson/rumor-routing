@@ -1,28 +1,24 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RequestTest {
+class RequestTest  {
+
+    @BeforeEach
+    Simulation sim;
+    void setup()throws IOException {
+        Scanner scanner = new Scanner(new File("layout.txt"));
+        Simulation sim = new Simulation(scanner, 2);
+    }
+
 
     @Test
     void traverse() {
-        Scanner scanner = new Scanner(
-                "10\n" +
-                        "0,0\n" +
-                        "1,1\n" +
-                        "2,2\n" +
-                        "3,3\n" +
-                        "4,4\n" +
-                        "5,5\n" +
-                        "6,6\n" +
-                        "7,7\n" +
-                        "8,8\n" +
-                        "9,9\n" +
-                        "12,12");
-        Simulation sim = new Simulation(scanner, 2);
-
         sim.addEventToNode(sim.getMap().getNodes().get(9));
         sim.createRequest(sim.getMap().getNodes().get(0), sim.getMap().getEvents().get(0));
 
@@ -31,32 +27,15 @@ class RequestTest {
         Node n2 = sim.getRequests().get(0).getCurrentNode();
 
         assertNotEquals(n1, n2);
-
-        assertFalse(sim.getRequests().get(0).isDead());
-
-
     }
 
     @Test
     void getEvent() {
+
     }
 
     @Test
-    void getNode() {
-        Scanner scanner = new Scanner(
-                "10\n" +
-                        "0,0\n" +
-                        "1,1\n" +
-                        "2,2\n" +
-                        "3,3\n" +
-                        "4,4\n" +
-                        "5,5\n" +
-                        "6,6\n" +
-                        "7,7\n" +
-                        "8,8\n" +
-                        "9,9\n" +
-                        "12,12");
-        Simulation sim = new Simulation(scanner, 2);
+    void getNode()throws IOException {
 
         sim.addEventToNode(sim.getMap().getNodes().get(9));
         sim.createRequest(sim.getMap().getNodes().get(0), sim.getMap().getEvents().get(0));
@@ -65,6 +44,26 @@ class RequestTest {
     }
 
     @Test
-    void isDead() {
+    void isDead() throws IOException{
+
+        sim.addEventToNode(sim.getMap().getNodes().get(9));
+        sim.createRequest(sim.getMap().getNodes().get(0), sim.getMap().getEvents().get(0));
+
+        assertFalse(sim.getRequests().get(0).isDead());
+    }
+
+    @Test
+    void HasReachedOriginNode() throws IOException{
+
+        sim.addEventToNode(sim.getMap().getNodes().get(0));
+        sim.createRequest(sim.getMap().getNodes().get(0), sim.getMap().getEvents().get(0));
+
+        Node originNode = sim.getRequests().get(0).getCurrentNode();
+        Request request = sim.getRequests().get(0);
+        for (int i = 0; !request.isDead(); i++) {
+            request.traverse();
+        }
+
+        assertEquals(originNode, request.getCurrentNode());
     }
 }
