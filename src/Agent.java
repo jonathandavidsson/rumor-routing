@@ -11,7 +11,7 @@ public class Agent {
     private Node currentNode;
     private Node prevNode;
     private ArrayList<Event> events;
-    private Set<Node> visitedNodes = new HashSet<>();
+    private Set<Node> visitedNodes;
     private int lifetime;
     private ArrayList<Node> neighbours;
     private ArrayList<Node> movable;
@@ -20,6 +20,7 @@ public class Agent {
         this.currentNode = currentNode;
         events = new ArrayList<>();
         ArrayList<Object> theInfo = new ArrayList<>();
+        visitedNodes = new HashSet<>();
         events.add(event);
         this.lifetime = 50;
     }
@@ -35,7 +36,7 @@ public class Agent {
         visitedNodes.add(currentNode);
 
 
-        if(!movable.isEmpty()){ //Flyttar på agenten så länge det finns en nod som den kan gå till (kan ha fastnat i ett hörn t.ex).
+        if(!movable.isEmpty()){//Flyttar på agenten så länge det finns en nod som den kan gå till (kan ha fastnat i ett hörn t.ex).
             prevNode = currentNode;
             currentNode = movable.get((int) (random() * movable.size()));
             lifetime = lifetime - 1;
@@ -47,6 +48,10 @@ public class Agent {
     }
     public ArrayList<Event> getEvents(){
         return events;
+    }
+
+    public boolean isDead() {
+        return lifetime == 0;
     }
 
     private void updateDistance() {
