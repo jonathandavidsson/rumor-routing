@@ -11,7 +11,7 @@ public class Agent {
     private Node currentNode;
     private Node prevNode;
     private ArrayList<Event> events;
-    private Set<Node> visitedNodes;
+    private Set<Node> visitedNodes = new HashSet<>();
     private int lifetime;
     private ArrayList<Node> neighbours;
     private ArrayList<Node> movable;
@@ -20,7 +20,6 @@ public class Agent {
         this.currentNode = currentNode;
         events = new ArrayList<>();
         ArrayList<Object> theInfo = new ArrayList<>();
-        visitedNodes = new HashSet<>();
         events.add(event);
         this.lifetime = 50;
     }
@@ -36,15 +35,15 @@ public class Agent {
         visitedNodes.add(currentNode);
 
 
-        if(!movable.isEmpty()){//Flyttar på agenten så länge det finns en nod som den kan gå till (kan ha fastnat i ett hörn t.ex).
+        if(!movable.isEmpty()){ //Flyttar på agenten så länge det finns en nod som den kan gå till (kan ha fastnat i ett hörn t.ex).
             prevNode = currentNode;
             currentNode = movable.get((int) (random() * movable.size()));
             lifetime = lifetime - 1;
         }else{
             lifetime = 0; //Om roboten inte kan röra sig sätter vi lifetime till 0 (agenten dör)
         }
-        putEventsInNode();
         updateDistance();
+        putEventsInNode();
     }
     public ArrayList<Event> getEvents(){
         return events;
@@ -53,8 +52,18 @@ public class Agent {
     private void updateDistance() {
         for(int i = 0; i < events.size(); i++){
             Event e = events.get(i);
-            e.setShortestWayToEvent(e.getShortestWayToEvent() + 1);
-            e.setNodeToEvent(prevNode);
+            if(currentNode.equals(e.getEventNode())){
+                e.setShortestWayToEvent(0);
+                e.setNodeToEvent(null);
+            } else if (prevNode != null) {
+                int oldDistance = e.getShortestWayToEvent();
+                int updatedDistance = oldDistance + 1;
+
+                if (e.getNodeToEvent() == null || updatedDistance < oldDistance) {
+                    e.setShortestWayToEvent(updatedDistance);
+                    e.setNodeToEvent(prevNode);
+                }
+            }
         }
     }
 
@@ -91,10 +100,6 @@ public class Agent {
 
     public Set<Node> getVisitedNodes(){
         return visitedNodes;
-    }
-
-    public boolean isDead(){
-        return lifetime == 0;
     }
 
     private ArrayList<Node> getMovableNeighbours(ArrayList<Node> neighbours){
