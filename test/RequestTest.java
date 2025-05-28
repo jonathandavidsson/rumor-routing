@@ -9,19 +9,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RequestTest  {
 
-    @BeforeEach
     Simulation sim;
-
+    @BeforeEach
     void setup()throws IOException {
         Scanner scanner = new Scanner(new File("layout.txt"));
-        Simulation sim = new Simulation(scanner, 2);
+        sim = new Simulation(scanner, 2);
+        sim.addEventToNode(sim.getMap().getNodes().get(8));
+        sim.createRequest(sim.getMap().getNodes().get(0), sim.getMap().getEvents().get(0));
     }
 
 
     @Test
     void traverse() {
-        sim.addEventToNode(sim.getMap().getNodes().get(9));
-        sim.createRequest(sim.getMap().getNodes().get(0), sim.getMap().getEvents().get(0));
 
         Node n1 = sim.getRequests().get(0).getCurrentNode();
         sim.getRequests().get(0).traverse();
@@ -36,28 +35,19 @@ class RequestTest  {
     }
 
     @Test
-    void getNode()throws IOException {
-
-        sim.addEventToNode(sim.getMap().getNodes().get(9));
-        sim.createRequest(sim.getMap().getNodes().get(0), sim.getMap().getEvents().get(0));
+    void getNode() {
 
         assertEquals(sim.getMap().getNodes().get(0), sim.getRequests().get(0).getCurrentNode());
     }
 
     @Test
-    void isDead() throws IOException{
-
-        sim.addEventToNode(sim.getMap().getNodes().get(9));
-        sim.createRequest(sim.getMap().getNodes().get(0), sim.getMap().getEvents().get(0));
+    void isDead() {
 
         assertFalse(sim.getRequests().get(0).isDead());
     }
 
     @Test
-    void HasReachedOriginNode() throws IOException{
-
-        sim.addEventToNode(sim.getMap().getNodes().get(0));
-        sim.createRequest(sim.getMap().getNodes().get(0), sim.getMap().getEvents().get(0));
+    void HasReachedOriginNode() {
 
         Node originNode = sim.getRequests().get(0).getCurrentNode();
         Request request = sim.getRequests().get(0);
