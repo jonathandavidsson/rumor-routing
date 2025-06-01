@@ -68,7 +68,7 @@ public class Simulation {
      * @param node the node the event will spawn on.
      */
     public void addEventToNode(Node node){
-        Event event = new Event(timestep, timestep, node, 0);
+        Event event = new Event(getEvents().size(), timestep, node, 0);
         int coinflip = (int) (Math.random() * 2);
         if (coinflip == 1) {
             Agent agent = new Agent(node, event);
