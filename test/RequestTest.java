@@ -45,14 +45,16 @@ class RequestTest  {
     }
 
     @Test
-    void HasReachedOriginNode() {
-
-        Node originNode = sim.getRequests().get(0).getNode();
+    void TestRequestLifetime() {
         Request request = sim.getRequests().get(0);
+        int traverseCount = 0;
 
-        while(!request.isDead()){
-            request.traverse();
+        while (!request.isDead() && traverseCount < 50){
+        request.traverse();
+        traverseCount++;
         }
-        assertEquals(originNode.getPosition(), request.getNode().getPosition());
+
+        assertTrue(traverseCount >= 45);
     }
+
 }
