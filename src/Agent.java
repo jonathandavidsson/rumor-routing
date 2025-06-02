@@ -15,7 +15,7 @@ import static java.lang.Math.random;
  * The agent lives for a total of 50 timesteps.
  *
  * Date: 28/05/25
- * Authors: Jonathan Davidsson, Joel ..., Liam ..., Lukasz ...
+ * Authors: Jonathan Davidsson,Joel Lindgren - dv24jon, Liam Danielski c24ldi, Lukasz Polok c24lpk
  */
 public class Agent implements Messenger{
 

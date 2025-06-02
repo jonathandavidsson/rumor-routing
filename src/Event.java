@@ -4,7 +4,7 @@
  * for every node. Event collaborates a lot with Agent and Request.
  *
  * Date: 28/05/25
- * Authors: Jonathan Davidsson, Joel ..., Liam ..., Lukasz ...
+ * Authors: Jonathan Davidsson, Joel Lindgren - dv24jon, Liam Danielski c24ldi, Lukasz Polok c24lpk
  */
 
 public class Event {

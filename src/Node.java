@@ -6,7 +6,7 @@ import java.util.*;
  * can be created at a node, and agent and request uses nodes to traverse through the map.
  *
  * Date: 28/05/25
- * Authors: Jonathan Davidsson, Joel ..., Liam ..., Lukasz ...
+ * Authors: Jonathan Davidsson, Joel Lindgren - dv24jon, Liam Danielski c24ldi, Lukasz Polok c24lpk
  */
 public class Node {
     private Queue<Messenger> messengers;

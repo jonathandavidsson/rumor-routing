@@ -7,7 +7,7 @@ import java.util.*;
  * add the info of events, request and such that are created within the map.
  *
  * Date: 28/05/25
- * Authors: Jonathan Davidsson, Joel ..., Liam ..., Lukasz ...
+ * Authors: Jonathan Davidsson,Joel Lindgren - dv24jon, Liam Danielski c24ldi, Lukasz Polok c24lpk
  */
 public class Map {
     private ArrayList<Node> theInfo;

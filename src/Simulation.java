@@ -9,7 +9,7 @@ import java.util.Scanner;
  * find the event. Requests can be spawned in this simulation, request searches for a event.
  * Date: 28/05/25
  *
- * @author: Jonathan Davidsson, Joel Lindgren - dv24jon, Liam ..., Lukasz ...
+ * @author: Jonathan Davidsson, Joel Lindgren - dv24jon, Liam Danielski c24ldi, Lukasz Polok c24lpk
  */
 public class Simulation {
     private final Map map;

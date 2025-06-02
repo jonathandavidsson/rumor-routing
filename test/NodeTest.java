@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class NodeTest {
 
     @Test
-    void getPosition() {
+    void TestgetPosition() {
         Position pos = new Position(1,1);
         Node node = new Node(pos);
 
@@ -14,7 +14,7 @@ class NodeTest {
     }
 
     @Test
-    void getNeighbours() {
+    void TestgetNeighbours() {
         Position centerPos = new Position(0, 0);
         Position neighbor1Pos = new Position(1, 0);
         Position neighbor2Pos = new Position(0, 1);
@@ -34,7 +34,7 @@ class NodeTest {
 
 
     @Test
-    void getKnownEvents() {
+    void TestgetKnownEvents() {
         Position pos = new Position(0, 0);
         Node node = new Node(pos);
 
@@ -50,7 +50,7 @@ class NodeTest {
     }
 
     @Test
-    void setNewEvent() {
+    void TestsetNewEvent() {
         Position pos = new Position(0, 0);
         Node node = new Node(pos);
 
@@ -64,11 +64,6 @@ class NodeTest {
         assertEquals(2, events.size());
     }
 
-    @Test
-    void setNearestEventDirection() {
-
-
-    }
 
     @Test
     void testEquals() {
@@ -88,7 +83,7 @@ class NodeTest {
     }
 
     @Test
-    void addNeighbour() {
+    void TestaddNeighbour() {
         Node mainNode = new Node(new Position(0, 0));
         Node neighbour = new Node(new Position(1, 0));
 
@@ -96,4 +91,10 @@ class NodeTest {
 
         assertTrue(mainNode.getNeighbours().contains(neighbour));
     }
+
+    @Test
+    void TestEnqueue(){
+
+    }
+
 }

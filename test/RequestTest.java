@@ -22,9 +22,9 @@ class RequestTest  {
     @Test
     void traverse() {
 
-        Node n1 = sim.getRequests().get(0).getCurrentNode();
+        Node n1 = sim.getRequests().get(0).getNode();
         sim.getRequests().get(0).traverse();
-        Node n2 = sim.getRequests().get(0).getCurrentNode();
+        Node n2 = sim.getRequests().get(0).getNode();
 
         assertNotEquals(n1, n2);
     }
@@ -37,7 +37,7 @@ class RequestTest  {
     @Test
     void getNode() {
 
-        assertEquals(sim.getMap().getNodes().get(0), sim.getRequests().get(0).getCurrentNode());
+        assertEquals(sim.getMap().getNodes().get(0), sim.getRequests().get(0).getNode());
     }
 
     @Test
@@ -49,12 +49,12 @@ class RequestTest  {
     @Test
     void HasReachedOriginNode() {
 
-        Node originNode = sim.getRequests().get(0).getCurrentNode();
+        Node originNode = sim.getRequests().get(0).getNode();
         Request request = sim.getRequests().get(0);
-        for (int i = 0; !request.isDead(); i++) {
+        while(request.isDead()){
             request.traverse();
         }
 
-        assertEquals(originNode, request.getCurrentNode());
+        assertEquals(originNode, request.getNode());
     }
 }

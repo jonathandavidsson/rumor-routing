@@ -7,7 +7,7 @@ import java.util.Stack;
  * the origin of the Request.
  *
  * Date: 28/05/25
- * @author: Jonathan Davidsson, Joel Lindgren - dv24jon, Liam ..., Lukasz ...
+ * @author: Jonathan Davidsson, Joel Lindgren - dv24jon, Liam Danielski c24ldi, Lukasz Polok c24lpk
  */
 public class Request implements Messenger {
 
