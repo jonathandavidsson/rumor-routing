@@ -94,7 +94,26 @@ class NodeTest {
 
     @Test
     void TestEnqueue(){
+        Node node = new Node(new Position(1,0));
+        Event event = new Event(1, 10, node, 5);
+        Agent agent = new Agent(node,event);
 
+        int sizeBefore = node.getMessengersInQueue().size();
+        node.enqueue(agent);
+        int sizeAfter = node.getMessengersInQueue().size();
+
+        assertTrue(sizeBefore < sizeAfter);
+    }
+
+    @Test
+    void Testdequeue(){
+        Node node = new Node(new Position(1,0));
+        Event event = new Event(1, 10, node, 5);
+        Agent agent = new Agent(node,event);
+
+        node.enqueue(agent);
+        boolean EmptyQueue = node.dequeue(agent);
+        assertTrue(EmptyQueue);
     }
 
 }
