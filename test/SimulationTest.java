@@ -1,10 +1,6 @@
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.Scanner;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SimulationTest {
 
@@ -32,15 +28,10 @@ class SimulationTest {
 
        sim.updateTime();
 
-       Position p2 = sim.getAgents().get(0).getNode().getPosition();
+       Position p2;
+        p2 = sim.getAgents().get(0).getNode().getPosition();
 
-       assertNotEquals(p1, p2);
-
-
-
-
-
-
+        assertNotEquals(p1, p2);
     }
 
     @Test

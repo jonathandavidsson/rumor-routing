@@ -30,19 +30,19 @@ class AgentTest {
     @org.junit.jupiter.api.Test
     void traverseUpdateEventDistance(){
         ArrayList<Event> events = agent.getEvents();
-        int eventDistance = events.getFirst().getShortestWayToEvent();
+        int eventDistance = events.get(0).getShortestWayToEvent();
         agent.traverse();
-        int eventDistance2 = events.getFirst().getShortestWayToEvent();
+        int eventDistance2 = events.get(0).getShortestWayToEvent();
         assertNotEquals(eventDistance, eventDistance2, "The distance should have been updated!");
 
     }
     @org.junit.jupiter.api.Test
     void traverseAddEventsInNode(){
-        ArrayList<Node> movable = agent.getMovableNeighbours(agent.getNode().getNeighbours());
-        Node node = movable.get(0);
+
+        Node node = agent.getNode();
         int eventsBefore = node.getKnownEvents().size();
         agent.traverse();
-        int eventsAfter = agent.getNode().getKnownEvents().size();
+        int eventsAfter = node.getKnownEvents().size();
         assertTrue(eventsAfter > eventsBefore, "Events after should be bigger!");
 
     }
