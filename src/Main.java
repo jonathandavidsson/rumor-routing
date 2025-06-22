@@ -8,19 +8,28 @@ public class Main{
 
         Scanner scanner = new Scanner(new File(args[0]));
         Simulation sim = new Simulation(scanner, 15);
+        System.out.println("chance of events: 0,02%");
+        System.out.println("Nodes where requests will be created:");
+        for (Node requestNodes : sim.getMap().getRequestNodes()) {
+            System.out.println(requestNodes.getPosition());
+        }
+        System.out.println("*******************");
 
+        int requestCounter = 0;
         for (int i = 1; i <= 10000; i++) {
             sim.updateTime();
             if (i%400 == 0 && !sim.getEvents().isEmpty()){
+                requestCounter += 4;
                 for (int j = 0; j < 4; j++) {
                     sim.createRequest(sim.getMap().getRequestNodes().get(j),
                             sim.getEvents().get((int) (Math.random() * sim.getEvents().size())));
                 }
 
             }
-
         }
+        System.out.println("****************");
         System.out.println("Amount of events created while running: " + sim.getEvents().size());
+        System.out.println("Amount of requests created while running: " + requestCounter);
 
     }
 

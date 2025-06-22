@@ -132,9 +132,11 @@ public class Simulation {
             for (Agent agent : agents) {
                 builder.append("Agent:").append(i).append(" position:").
                         append(agent.getNode().getPosition().toString()).append("   ");
+                i++;
             }
         }
         builder.append("\n");
+        i = 0;
 
         if (requests.isEmpty()){
             builder.append("No Requests\n");
@@ -142,6 +144,7 @@ public class Simulation {
             for (Request request : requests){
                 builder.append("Request:").append(i).append(" position:").
                         append(request.getNode().getPosition().toString()).append("   ");
+                i++;
             }
 
         }
