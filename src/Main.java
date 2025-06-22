@@ -30,7 +30,7 @@ public class Main{
         System.out.println("****************");
         System.out.println("Amount of events created while running: " + sim.getEvents().size());
         System.out.println("Amount of requests created while running: " + requestCounter);
-
+        System.out.println("number of successful requests: " + sim.getNumbSuccessfulRequests());
     }
 
 

@@ -18,6 +18,7 @@ public class Simulation {
     private ArrayList<Request> requests;
     private double percentChanceOfEvents;
     private ArrayList<Event> events;
+    private int numbSuccessfulRequests;
 
     public Simulation(Scanner s, int nodeReach){
         map = new Map(s, nodeReach);
@@ -25,6 +26,7 @@ public class Simulation {
         requests = new ArrayList<>();
         percentChanceOfEvents = 0.0001;
         timestep = 0;
+        numbSuccessfulRequests = 0;
     }
 
     /**
@@ -55,6 +57,7 @@ public class Simulation {
                 Request request = iterator.next();
                 if (request.traverse()) {
                     request.printRequestEvent();
+                    numbSuccessfulRequests ++;
                 }
                 if (request.isDead()) {
                     iterator.remove();
@@ -108,6 +111,13 @@ public class Simulation {
      */
     public ArrayList<Request> getRequests(){
         return requests;
+    }
+
+    /**
+     * @return an int of the number of successful requests.
+     */
+    public int getNumbSuccessfulRequests() {
+        return numbSuccessfulRequests;
     }
 
     /**
