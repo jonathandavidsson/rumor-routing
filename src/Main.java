@@ -9,6 +9,11 @@ public class Main{
         Scanner scanner = new Scanner(new File(args[0]));
         Simulation sim = new Simulation(scanner, 15);
 
+        System.out.println("Program starting...");
+        System.out.println("Input file: " + args[0]);
+        System.out.println("Starting events: " + sim.getEvents().size());
+        System.out.println("Starting requests: " + sim.getRequests().size());
+        System.out.println("----------------------");
         for (int i = 1; i <= 10000; i++) {
             sim.updateTime();
             if (i%400 == 0 && !sim.getEvents().isEmpty()){
@@ -21,6 +26,9 @@ public class Main{
 
         }
         System.out.println("Amount of events created while running: " + sim.getEvents().size());
+        System.out.println("Amount of requests sent while running: " + sim.getRequests().size());
+        System.out.println("Amount of nodes in system: " + sim.getMap().getNodes().size());
+
 
     }
 
