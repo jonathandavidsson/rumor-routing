@@ -3,12 +3,16 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main{
+
     public static void main(String[] args) throws FileNotFoundException {
 
 
         Scanner scanner = new Scanner(new File(args[0]));
         Simulation sim = new Simulation(scanner, 15);
+        System.out.println("Program starting...");
+        System.out.println("Input file: " + args[0]);
         System.out.println("chance of events: 0,02%");
+        System.out.println("Amount of nodes in system: " + sim.getMap().getNodes().size());
         System.out.println("Nodes where requests will be created:");
         for (Node requestNodes : sim.getMap().getRequestNodes()) {
             System.out.println(requestNodes.getPosition());
@@ -16,7 +20,9 @@ public class Main{
         System.out.println("*******************");
 
         int requestCounter = 0;
-        for (int i = 1; i <= 10000; i++) {
+        int timesteps = 1000;
+        
+        for (int i = 1; i <= timesteps; i++) {
             sim.updateTime();
             if (i%400 == 0 && !sim.getEvents().isEmpty()){
                 requestCounter += 4;
@@ -28,7 +34,7 @@ public class Main{
             }
         }
         System.out.println("****************");
-        System.out.println("Timesteps: 10000");
+        System.out.println("Timesteps:" + timesteps);
         System.out.println("Amount of events created while running: " + sim.getEvents().size());
         System.out.println("Amount of requests created while running: " + requestCounter);
         System.out.println("number of successful requests: " + sim.getNumbSuccessfulRequests());
